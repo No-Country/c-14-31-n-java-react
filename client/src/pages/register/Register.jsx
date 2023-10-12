@@ -40,7 +40,7 @@ const Register = () => {
 
         <div>
           <label htmlFor="">
-            Deseo recibir ofertas por email
+            Deseo recibir ofertas por emaill
             <input type="checkbox" />
           </label>
           <button>Registrarme</button>
