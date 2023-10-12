@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header className="w-full h-16 flex justify-evenly items-center  bg-red-300">
       <div>
-        <p>Logo</p>
+        <p>Logoa</p>
       </div>
 
       <nav className="w-1/2">
