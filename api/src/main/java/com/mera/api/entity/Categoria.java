@@ -1,4 +1,4 @@
-package com.mera.api.model;
+package com.mera.api.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
