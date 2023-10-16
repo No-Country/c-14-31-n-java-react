@@ -1,2 +1,10 @@
-package com.mera.api.dto.request;public class UsuarioLoginDto {
+package com.mera.api.dto.request;
+
+import lombok.Getter;
+
+@Getter
+public class UsuarioLoginDto {
+    private String email;
+
+    private String password;
 }
