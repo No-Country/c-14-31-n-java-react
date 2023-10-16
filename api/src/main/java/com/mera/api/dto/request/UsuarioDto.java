@@ -1,8 +1,6 @@
 package com.mera.api.dto.request;
 
 import com.mera.api.enumeration.RoleName;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +13,7 @@ public class UsuarioDto {
     private String direccion;
     private String telefono;
     private String password;
-    @Enumerated(EnumType.STRING)
-    private RoleName rol;
+    private RoleName rol = RoleName.ROL_USER;
 
 
 }
