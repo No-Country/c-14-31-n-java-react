@@ -1,7 +1,9 @@
 package com.mera.api.controller;
 
+import com.mera.api.entity.Categoria;
 import com.mera.api.entity.Producto;
 import com.mera.api.record.*;
+import com.mera.api.repository.ICategoriaRepository;
 import com.mera.api.repository.IProductoRepository;
 
 import jakarta.validation.Valid;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/productos")
@@ -22,10 +25,14 @@ public class ProductoController {
 
     @Autowired
     private IProductoRepository iProductoRepository;
-    @PostMapping
-    public ResponseEntity<DatosRespuestaProducto> registrarProducto(@RequestBody @Valid DatosRegistroProducto datosRegistroProducto, UriComponentsBuilder uriComponentsBuilder){
 
-        Producto producto = iProductoRepository.save(new Producto(datosRegistroProducto));
+    @Autowired
+    private ICategoriaRepository iCategoriaRepository;
+    @PostMapping
+    public ResponseEntity<DatosRespuestaProducto> registrarProducto(@RequestBody @Valid DatosRegistroProducto datosRegistroProducto, DatosRegistroCategoria datosRegistroCategoria, UriComponentsBuilder uriComponentsBuilder){
+//.orElse(null)
+        Optional<Categoria> categoria = iCategoriaRepository.findById(datosRegistroCategoria.id());
+        Producto producto = iProductoRepository.save(new Producto(datosRegistroProducto, categoria.orElse(null)));
 
         DatosRespuestaProducto datosRespuestaProducto = new DatosRespuestaProducto(producto.getId(), producto.getNombre(), producto.getDescripcion(),
                 producto.getPrecio(), producto.getStock(), producto.getImagen(), producto.getColor(), producto.getTalle());

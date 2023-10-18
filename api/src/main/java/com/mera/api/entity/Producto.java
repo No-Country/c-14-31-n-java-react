@@ -28,10 +28,11 @@ public class Producto {
     private String talle;
 
     @ManyToOne
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
 
-    public Producto(DatosRegistroProducto datosRegistroProducto) {
+    public Producto(DatosRegistroProducto datosRegistroProducto, Categoria categoria) {
         this.nombre = datosRegistroProducto.nombre();
         this.descripcion = datosRegistroProducto.descripcion();
         this.precio = datosRegistroProducto.precio();
@@ -39,6 +40,7 @@ public class Producto {
         this.imagen = datosRegistroProducto.imagen();
         this.color = datosRegistroProducto.color();
         this.talle = datosRegistroProducto.talle();
+        this.categoria = categoria;
 
     }
 
