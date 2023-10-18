@@ -39,7 +39,7 @@ public class Producto {
         this.imagen = datosRegistroProducto.imagen();
         this.color = datosRegistroProducto.color();
         this.talle = datosRegistroProducto.talle();
-        this.categoria = new Categoria(categoria.getNombre);
+
     }
 
 
