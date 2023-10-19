@@ -32,7 +32,7 @@ public class Producto {
     private Categoria categoria;
 
 
-    public Producto(DatosRegistroProducto datosRegistroProducto, Categoria categoria) {
+    public Producto(DatosRegistroProducto datosRegistroProducto) {
         this.nombre = datosRegistroProducto.nombre();
         this.descripcion = datosRegistroProducto.descripcion();
         this.precio = datosRegistroProducto.precio();
@@ -41,10 +41,6 @@ public class Producto {
         this.color = datosRegistroProducto.color();
         this.talle = datosRegistroProducto.talle();
        // this.categoria = categoria;
-
-    }
-
-    public Producto(DatosRegistroProducto datosRegistroProducto) {
 
     }
 
