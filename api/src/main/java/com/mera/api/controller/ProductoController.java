@@ -1,10 +1,10 @@
 package com.mera.api.controller;
 
 import com.mera.api.entity.Producto;
-import com.mera.api.entity.Producto;
+
 import com.mera.api.record.*;
 import com.mera.api.repository.IProductoRepository;
-import com.mera.api.repository.IProductoRepository;
+
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
+
 @RestController
 @RequestMapping("/productos")
 public class ProductoController {
