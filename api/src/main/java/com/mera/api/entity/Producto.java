@@ -40,7 +40,11 @@ public class Producto {
         this.imagen = datosRegistroProducto.imagen();
         this.color = datosRegistroProducto.color();
         this.talle = datosRegistroProducto.talle();
-        this.categoria = categoria;
+       // this.categoria = categoria;
+
+    }
+
+    public Producto(DatosRegistroProducto datosRegistroProducto) {
 
     }
 

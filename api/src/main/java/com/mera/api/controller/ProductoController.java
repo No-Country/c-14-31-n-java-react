@@ -1,9 +1,9 @@
 package com.mera.api.controller;
 
-import com.mera.api.entity.Categoria;
+import com.mera.api.entity.Producto;
 import com.mera.api.entity.Producto;
 import com.mera.api.record.*;
-import com.mera.api.repository.ICategoriaRepository;
+import com.mera.api.repository.IProductoRepository;
 import com.mera.api.repository.IProductoRepository;
 
 import jakarta.validation.Valid;
@@ -18,21 +18,16 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/productos")
 public class ProductoController {
 
     @Autowired
     private IProductoRepository iProductoRepository;
-
-    @Autowired
-    private ICategoriaRepository iCategoriaRepository;
     @PostMapping
-    public ResponseEntity<DatosRespuestaProducto> registrarProducto(@RequestBody @Valid DatosRegistroProducto datosRegistroProducto, DatosRegistroCategoria datosRegistroCategoria, UriComponentsBuilder uriComponentsBuilder){
-//.orElse(null)
-        Optional<Categoria> categoria = iCategoriaRepository.findById(datosRegistroCategoria.id());
-        Producto producto = iProductoRepository.save(new Producto(datosRegistroProducto, categoria.orElse(null)));
+    public ResponseEntity<DatosRespuestaProducto> registrarProducto(@RequestBody @Valid DatosRegistroProducto datosRegistroProducto, UriComponentsBuilder uriComponentsBuilder){
+
+        Producto producto = iProductoRepository.save(new Producto(datosRegistroProducto));
 
         DatosRespuestaProducto datosRespuestaProducto = new DatosRespuestaProducto(producto.getId(), producto.getNombre(), producto.getDescripcion(),
                 producto.getPrecio(), producto.getStock(), producto.getImagen(), producto.getColor(), producto.getTalle());
@@ -67,7 +62,7 @@ public class ProductoController {
 
     @GetMapping("/{id}")
     public ResponseEntity retornarDatosProducto(@PathVariable  Long id){
-       Producto producto = iProductoRepository.getReferenceById(id);
+        Producto producto = iProductoRepository.getReferenceById(id);
         var datosProducto = new DatosRespuestaProducto(producto.getId(), producto.getNombre(), producto.getDescripcion(),
                 producto.getPrecio(), producto.getStock(), producto.getImagen(), producto.getColor(), producto.getTalle());
         return ResponseEntity.ok(datosProducto);
