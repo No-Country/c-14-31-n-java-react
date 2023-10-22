@@ -27,7 +27,7 @@ const Header = () => {
       </div>
 
       <div className="w-16 text-2xl flex justify-between">
-        <Link to={"/register"}>
+        <Link to={"/login"}>
           <AiOutlineUser />
         </Link>
         <BsCart3 />
