@@ -1,16 +1,16 @@
-package com.mare.api.service;
+package com.mare.api.service.impl;
 
 
 import com.mare.api.entity.Category;
 import com.mare.api.repository.ICategoryRepository;
-import com.mare.api.service.impl.ICategoryService;
+import com.mare.api.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CategoryService implements ICategoryService {
+public class CategoryServiceImpl implements ICategoryService {
 
     @Autowired
     private ICategoryRepository iCategoryRepository;

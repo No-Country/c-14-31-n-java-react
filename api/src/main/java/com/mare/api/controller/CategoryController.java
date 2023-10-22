@@ -1,7 +1,7 @@
 package com.mare.api.controller;
 
 import com.mare.api.entity.Category;
-import com.mare.api.service.impl.ICategoryService;
+import com.mare.api.service.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +30,6 @@ public class CategoryController {
     }
 
     @PostMapping("/categories")
-    public void save(@RequestBody Category category){
-        iCategoryService.save(category);
-    }
+    public void save(@RequestBody Category category) { iCategoryService.save(category); }
 
 }

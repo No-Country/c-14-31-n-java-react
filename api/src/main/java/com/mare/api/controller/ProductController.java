@@ -1,7 +1,7 @@
 package com.mare.api.controller;
 
 import com.mare.api.entity.Product;
-import com.mare.api.service.impl.IProductService;
+import com.mare.api.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

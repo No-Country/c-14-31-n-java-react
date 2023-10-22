@@ -1,4 +1,4 @@
-package com.mare.api.service.impl;
+package com.mare.api.service;
 
 import com.mare.api.entity.Product;
 

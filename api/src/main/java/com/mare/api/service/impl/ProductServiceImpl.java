@@ -1,14 +1,14 @@
-package com.mare.api.service;
+package com.mare.api.service.impl;
 
 import com.mare.api.entity.Product;
 import com.mare.api.repository.IProductRepository;
-import com.mare.api.service.impl.IProductService;
+import com.mare.api.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class ProductService implements IProductService {
+public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private IProductRepository iProductRepository;
