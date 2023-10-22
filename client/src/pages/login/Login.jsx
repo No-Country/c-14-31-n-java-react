@@ -1,8 +1,15 @@
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <main>
+      <section>
+
+      </section>
+      <article>
+        
+      </article>
+    </main>
   )
 }
 
-export { Login }
+export default Login
