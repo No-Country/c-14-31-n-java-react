@@ -9,7 +9,7 @@ const Faq = () => {
             <div>
                 <Header />
             </div>
-            <div className="w-full">
+            <div className="w-full flex justify-center items-center h-full">
                 <div className="max-w-md md:mx-auto">
                     <div className="border-y-2 border-neutral-400">
                         <h2 className="text-primary-700 text-center font-bold text-xl">Lorem ipsum dolor sit amet?</h2>
