@@ -10,11 +10,13 @@ const Footer = () => {
           <BsWhatsapp className="hover:text-neutral-400 transition ease-in-out hover:-translate-y-0.5 hover:scale-110 duration-300 cursor-pointer" />
         </div>
         <div>
-          <p className="text-neutral-400 text-[12px]">&copy; Copyright 2023. Todos los derechos reservados</p>
+          <p className="text-neutral-400 text-[12px]">
+            &copy; Copyright 2023. Todos los derechos reservados
+          </p>
         </div>
       </div>
     </footer>
-  )
+  );
 };
 
 export { Footer };

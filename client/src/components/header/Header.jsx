@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header
-      className="max-w-screen-2xl h-[4.5625rem] flex justify-between items-center  relative bg-neutral-50 lg:justify-around"
+      className="max-w-screen-2xl h-[4.5625rem] flex justify-between items-center m-auto  relative bg-neutral-50 lg:justify-around"
       ref={menuRef}>
       <div className="w-[13.5rem] h-[4.25rem] mx-3">
         <Link to={"/"}>
@@ -60,9 +60,11 @@ const Header = () => {
           toggleMenu ? "left-0" : "-left-full"
         } lg:left-0 lg:w-3/4 lg:h-[4.5625rem] lg:top-0 lg:relative lg:flex lg:items-center`}>
         <ul className="space-y-1 lg:space-y-0 lg:flex lg:w-full lg:justify-evenly">
-          <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+          <Link
+            to={"/"}
+            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
             <span className="font-medium"> Inicio </span>
-          </li>
+          </Link>
 
           <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
             <span className="font-medium"> Nosotros </span>
