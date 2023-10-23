@@ -8,7 +8,7 @@ import Register from "./pages/register/Register";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import Store from "./pages/store/Store";
 import Faq from "./pages/faq/Faq";
-import Contact from "./pages/contact/Contact"
+import Contact from "./pages/contact/Contact";
 
 const router = createBrowserRouter([
   {
