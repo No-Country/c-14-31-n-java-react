@@ -74,9 +74,11 @@ const Header = () => {
             <span className="font-medium">FAQ</span>
           </li>
 
-          <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+          <Link
+            to={"/store"}
+            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
             <span className="font-medium text-primary-500">Tienda</span>
-          </li>
+          </Link>
 
           {/*<li className="lg:flex lg:items-center">
             <details className=" group [&_summary::-webkit-details-marker]:hidden  lg:relative">
