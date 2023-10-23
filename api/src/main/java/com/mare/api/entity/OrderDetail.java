@@ -3,23 +3,29 @@ package com.mare.api.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
+@Table(name = "details")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class OrderItem {
+public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String name;
     private int quantity;
-    @ManyToOne
-    @JoinColumn(name = "order_id")
+    private double price;
+    private double total;
+
+    @OneToOne
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
     private Product product;
+
+
 }

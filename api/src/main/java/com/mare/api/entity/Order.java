@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "ordenes")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -18,13 +19,17 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String numero;
     private LocalDate orderDate;
+    private LocalDate dateReceived;
+    private double total;
 
     @OneToMany(mappedBy = "order")
-    private List<OrderItem> orderItems;
-
+    private List<OrderDetail> orderItems;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private Usuario usuario;
+
+    @OneToOne(mappedBy = "order")
+    private OrderDetail orderDetail;
 }
