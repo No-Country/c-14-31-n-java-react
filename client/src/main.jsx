@@ -5,6 +5,10 @@ import "./index.css";
 import Home from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import AboutUs from "./pages/aboutUs/AboutUs";
+import Store from "./pages/store/Store";
+import Faq from "./pages/faq/Faq";
+import Contact from "./pages/contact/Contact"
 
 const router = createBrowserRouter([
   {
@@ -18,6 +22,22 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/register",
+    element: <AboutUs />,
+  },
+  {
+    path: "/register",
+    element: <Store />,
+  },
+  {
+    path: "/register",
+    element: <Faq />,
+  },
+  {
+    path: "/register",
+    element: <Contact />,
   },
 ]);
 
