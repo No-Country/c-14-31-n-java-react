@@ -10,8 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email) && /^.{6,12}$/.test(password)) {
@@ -19,6 +18,18 @@ const Login = () => {
       document.getElementById("form-message").classList.add('hidden');
       document.getElementById("form-message").classList.remove('block');
       
+      const response = await axios.post("localhost:8080/api.mare.com/usuarios/login",{
+        email,
+        password
+      });   
+      if(response.status===200){
+        console.log("Inicio de sesion exitoso");
+      }
+      else{
+        console.log("No fue exitoso el inicio de sesion");
+      }
+      console.log(response.status);
+
       
     } else {
       console.log("Login invalido")
