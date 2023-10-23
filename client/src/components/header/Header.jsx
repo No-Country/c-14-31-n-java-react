@@ -70,9 +70,9 @@ const Header = () => {
             <span className="font-medium"> Nosotros </span>
           </Link>
 
-          <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+          <Link to="/faq" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
             <span className="font-medium">FAQ</span>
-          </li>
+          </Link>
 
           <Link
             to={"/store"}
