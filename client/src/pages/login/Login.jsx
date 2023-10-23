@@ -1,9 +1,9 @@
-<<<<<<< HEAD
 import { Link } from "react-router-dom";
 import imgLogin from "../../assets/img/login.jpg";
 import { useState } from "react";
 import { BiError } from "react-icons/bi";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
+import axios from "axios";
 
 const Login = () => {
 
@@ -110,5 +110,3 @@ const Login = () => {
 }
 
 export  {Login}
-=======
->>>>>>> 98e4c647d6ee2b8ca2d9d4cd73c607dedf1a55dd
