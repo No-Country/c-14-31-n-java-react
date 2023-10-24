@@ -1,10 +1,18 @@
 package com.mare.api.controller;
 
 import com.mare.api.entity.Category;
+import com.mare.api.entity.Product;
+import com.mare.api.record.DataRegisterCategory;
+import com.mare.api.record.DataRegisterProduct;
 import com.mare.api.service.ICategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 
@@ -15,21 +23,29 @@ public class CategoryController {
     private ICategoryService iCategoryService;
 
     @GetMapping("/categories")
-    public List<Category> getAll(){
-        return iCategoryService.getAll();
+    public ResponseEntity<List<Category>> getAll(){
+        List<Category> categories = iCategoryService.getAll();
+        return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
     @GetMapping("/categories/{id}")
-    public Category getById(@PathVariable String id){
-       return iCategoryService.getById(Long.parseLong(id));
+    public ResponseEntity<Category> getById(@PathVariable String id){
+        Long categoryId = Long.parseLong(id);
+        Category category = iCategoryService.getById(categoryId);
+        return new ResponseEntity<>(category, HttpStatus.OK);
     }
 
     @DeleteMapping("/categories/{id}")
-    public void remove(@PathVariable String id){
-        iCategoryService.remove(Long.parseLong(id));
+    public ResponseEntity<Void> remove(@PathVariable String id) {
+        Long categoryId = Long.parseLong(id);
+        iCategoryService.remove(categoryId);
+        return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PostMapping("/categories")
-    public void save(@RequestBody Category category) { iCategoryService.save(category); }
+    public ResponseEntity<DataRegisterCategory> save(@RequestBody @Valid DataRegisterCategory dataRegisterCategory) throws URISyntaxException {
+        iCategoryService.save(new Category(dataRegisterCategory));
+        return ResponseEntity.created(new URI("/categories" + dataRegisterCategory.id())).body(dataRegisterCategory);
+    }
 
 }

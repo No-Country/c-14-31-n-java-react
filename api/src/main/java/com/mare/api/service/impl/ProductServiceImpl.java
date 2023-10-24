@@ -13,8 +13,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private IProductRepository iProductRepository;
-    @Autowired
-    private ICategoryRepository iCategoryRepository;
+
     @Override
     public List<Product> getAll() {
         return (List<Product>) iProductRepository.findAll();
