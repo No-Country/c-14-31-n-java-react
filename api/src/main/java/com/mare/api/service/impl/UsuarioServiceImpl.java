@@ -31,7 +31,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
     //creamos un ModelMapper(debemos tener la dependencia en el pom).La clase ModelMapper nos permite transformar un objeto relacional en un objeto java
 
 
-
     @Override
     public RespStandart registrarUsuario(UsuarioDto usuarioDto) {
         RespStandart resp;
@@ -45,7 +44,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
             usuarioRepository.save(usuario);
             resp = new RespStandart("Usuario creado con exito");
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException("Error al Registrar Usuario");
         }
 
@@ -60,9 +59,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
         Boolean loginOk = verificaPass(usuarioLoginDto.getPassword(), usuario.getPassword());
         System.out.println(loginOk);
-        if(loginOk){
-             resp = new RespStandart("login Exitoso");
-        }else{
+        if (loginOk) {
+            resp = new RespStandart("login Exitoso");
+        } else {
             resp = new RespStandart("Contraseña Incorrecta");
         }
 
@@ -71,38 +70,33 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
 
-
-
     ////////////////////////////////// Metodos de apoyo ////////////////////
 
-    private Boolean verificaPass(String loginPass ,String bbddPass) {
+    private Boolean verificaPass(String loginPass, String bbddPass) {
 
-        return encrypService.matches((String)loginPass, bbddPass);
+        return encrypService.matches((String) loginPass, bbddPass);
 
     }
-
-
 
 
     private void chequeoExisteMail(String email) {
 
-       List<Usuario>listaFiltrada = listaUsuarioFiltrada(email);
-       if (listaFiltrada.size()>0 ){
-           throw new UsuarioFoundException("El mail ya esta en Uso !!");
-       }
+        List<Usuario> listaFiltrada = listaUsuarioFiltrada(email);
+        if (listaFiltrada.size() > 0) {
+            throw new UsuarioFoundException("El mail ya esta en Uso !!");
+        }
 
     }
 
 
-
     private Usuario obtenerDatosUsuario(String email) {
         List<Usuario> lista = listaUsuarioFiltrada(email);
-        if(!(lista.size()==0)){
+        if (!(lista.size() == 0)) {
             Optional<Usuario> usuarioEncontrado = lista.stream().filter(x -> x.getEmail().equals(email)).findFirst();
-            if(usuarioEncontrado.isPresent()){
+            if (usuarioEncontrado.isPresent()) {
                 return usuarioEncontrado.get();
             }
-        }else{
+        } else {
             throw new UsuarioNotFoundException("Mail No Encontrado !!");
         }
 
@@ -110,11 +104,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
 
-    private List<Usuario> listaUsuarioFiltrada(String email){
+    private List<Usuario> listaUsuarioFiltrada(String email) {
         List<Usuario> usuarioList = usuarioRepository.findAll();
 
-        return usuarioList.stream().filter(x-> x.getEmail().equals(email)).toList();
+        return usuarioList.stream().filter(x -> x.getEmail().equals(email)).toList();
     }
-
-
 }
