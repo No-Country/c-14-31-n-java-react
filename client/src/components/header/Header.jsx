@@ -113,7 +113,7 @@ const Header = () => {
           {/*<Link
             className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700"
             to={"/register"}>
-            <AiOutlineUser className="text-2xl" />
+            <AiOutlgitineUser className="text-2xl" />
             <span className="font-medium">Mi Cuenta</span>
           </Link>*/}
         </ul>
