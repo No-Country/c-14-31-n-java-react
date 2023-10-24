@@ -67,6 +67,7 @@ const Header = () => {
               <span className="font-medium"> Inicio </span>
             </Link>
 
+<<<<<<< HEAD
             <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
               <span className="font-medium"> Nosotros </span>
             </li>
@@ -74,6 +75,15 @@ const Header = () => {
             <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
               <span className="font-medium">FAQ</span>
             </li>
+=======
+          <Link to="/aboutUs" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+            <span className="font-medium"> Nosotros </span>
+          </Link>
+
+          <Link to="/faq" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+            <span className="font-medium">FAQ</span>
+          </Link>
+>>>>>>> 7caa19309d8be7b0e444c8ace9437ff315859d6d
 
             <Link
               to={"/store"}
@@ -127,6 +137,7 @@ const Header = () => {
             </details>
           </li>*/}
 
+<<<<<<< HEAD
             <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
               <span className="font-medium"> Contacto</span>
             </li>
@@ -144,6 +155,21 @@ const Header = () => {
               <span className="font-medium">Inicio de Sesión</span>
             </Link>
           </div>
+=======
+          <Link to="/contact" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
+            <span className="font-medium"> Contacto</span>
+          </Link>
+          <Link
+            to={"/register"}
+            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
+            <span className="font-medium">Registrarse</span>
+          </Link>
+          <Link
+            to={"/login"}
+            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
+            <span className="font-medium">Inicio de Sesión</span>
+          </Link>
+>>>>>>> 7caa19309d8be7b0e444c8ace9437ff315859d6d
 
           {/*<Link
             className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700"
