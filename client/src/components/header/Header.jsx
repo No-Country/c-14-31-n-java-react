@@ -58,14 +58,24 @@ const Header = () => {
       <nav
         className={`w-3/4 absolute top-[4.5625rem] transition-all duration-500 ease-in-out z-50  bg-neutral-50 ${
           toggleMenu ? "left-0" : "-left-full"
-        } lg:left-0 lg:w-3/4 lg:h-[4.5625rem] lg:top-0 lg:relative lg:flex lg:items-center`}>
-        <ul className="space-y-1 lg:space-y-0 lg:flex lg:w-full lg:justify-evenly">
-          <Link
-            to={"/"}
-            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
-            <span className="font-medium"> Inicio </span>
-          </Link>
+        } lg:left-0 lg:w-3/4 lg:h-[4.5625rem] lg:top-0 lg:relative lg:flex lg:items-center lg:text-sm`}>
+        <ul className="space-y-1 lg:space-y-0 lg:flex lg:w-full xl:justify-between ">
+          <div className="lg:w-3/5 lg:flex lg:justify-center xl:w-4/5">
+            <Link
+              to={"/"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900 ">
+              <span className="font-medium"> Inicio </span>
+            </Link>
 
+<<<<<<< HEAD
+            <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+              <span className="font-medium"> Nosotros </span>
+            </li>
+
+            <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+              <span className="font-medium">FAQ</span>
+            </li>
+=======
           <Link to="/aboutUs" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
             <span className="font-medium"> Nosotros </span>
           </Link>
@@ -73,14 +83,15 @@ const Header = () => {
           <Link to="/faq" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
             <span className="font-medium">FAQ</span>
           </Link>
+>>>>>>> 7caa19309d8be7b0e444c8ace9437ff315859d6d
 
-          <Link
-            to={"/store"}
-            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
-            <span className="font-medium text-primary-500">Tienda</span>
-          </Link>
+            <Link
+              to={"/store"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+              <span className="font-medium text-primary-500">Tienda</span>
+            </Link>
 
-          {/*<li className="lg:flex lg:items-center">
+            {/*<li className="lg:flex lg:items-center">
             <details className=" group [&_summary::-webkit-details-marker]:hidden  lg:relative">
               <summary className="group flex items-center justify-between rounded-lg px-4 py-2  text-primary-300 ">
                 <div className="flex items-center gap-2 lg:gap-x-2">
@@ -126,6 +137,25 @@ const Header = () => {
             </details>
           </li>*/}
 
+<<<<<<< HEAD
+            <li className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
+              <span className="font-medium"> Contacto</span>
+            </li>
+          </div>
+
+          <div className="lg:w-2/5 lg:flex lg:justify-around xl:w-1/4">
+            <Link
+              to={"/register"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative border bg-primary-700 lg:text-white lg:hover:bg-white lg:hover:border-primary-700  lg:hover:text-primary-700 transition ease-in-out duration-500 ">
+              <span className="font-medium">Registrarse</span>
+            </Link>
+            <Link
+              to={"/login"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative border bg-primary-700 lg:bg-primary-700 lg:text-white lg:hover:bg-white lg:hover:text-primary-700 transition ease-in-out duration-500">
+              <span className="font-medium">Inicio de Sesión</span>
+            </Link>
+          </div>
+=======
           <Link to="/contact" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
             <span className="font-medium"> Contacto</span>
           </Link>
@@ -139,6 +169,7 @@ const Header = () => {
             className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
             <span className="font-medium">Inicio de Sesión</span>
           </Link>
+>>>>>>> 7caa19309d8be7b0e444c8ace9437ff315859d6d
 
           {/*<Link
             className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700"

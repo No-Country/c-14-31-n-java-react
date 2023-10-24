@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "../../components/header/Header";
+import { Footer } from "../../components/footer/Footer";
 import Card from "../../components/card/Card";
 
 import example1 from "../../assets/img/ExampleCard1.png";
@@ -7,15 +8,16 @@ import example2 from "../../assets/img/ExampleCard2.png";
 import example3 from "../../assets/img/ExampleCard3.png";
 import example4 from "../../assets/img/ExampleCard4.png";
 import example5 from "../../assets/img/ExampleCard5.png";
+
 import useFetchAllCategories from "../../services/useFetchAllCategories";
 
 const Store = () => {
   const [category, setCategory] = useState("");
 
-  const { allCategories } = useFetchAllCategories();
+  //const { allCategories } = useFetchAllCategories();
 
-  if (!allCategories) return;
-  console.log(allCategories);
+  //if (!allCategories) return;
+  //console.log(allCategories);
 
   const handleChangeCategory = (e) => {
     const categoryOption = e.target.value;
@@ -23,10 +25,10 @@ const Store = () => {
   };
 
   return (
-    <main>
+    <main className="max-w-screen-2xl m-auto">
       <Header />
       <section className="flex relative ">
-        <article className="w-full h-screen absolute md:w-1/4 md:sticky md:top-0 md:bg-secondary-200">
+        <article className="w-full absolute md:w-1/4 md:sticky md:top-0 md:bg-secondary-200">
           <ul>
             <li className="lg:flex lg:items-center  bg-secondary-200">
               <details className=" group [&_summary::-webkit-details-marker]:hidden  lg:relative">
@@ -38,7 +40,7 @@ const Store = () => {
 
                 <ul>
                   <li className="lg:flex lg:items-center">
-                    <details className=" group/categories [&_summary::-webkit-details-marker]:hidden  lg:relative">
+                    <details className=" group/categories [&_summary::-webkit-details-marker]:hidden lg:relative">
                       <summary className="group/categories flex items-center justify-between rounded-lg px-4 py-2  text-primary-300 ">
                         <div className="flex items-center gap-2 lg:gap-x-2">
                           <span className="font-medium"> Categoria </span>
@@ -60,7 +62,7 @@ const Store = () => {
                         </span>
                       </summary>
 
-                      <ul className="mt-2 space-y-1 bg-secondary-300 lg:mt-3 lg:w-36 lg:px-3 lg:py-4 lg:absolute lg:bg-neutral-100">
+                      <ul className="mt-2 space-y-1 bg-secondary-300 lg:mt-3 lg:w-52 lg:px-3 lg:py-4 lg:absolute lg:bg-neutral-100">
                         <label htmlFor="remera">
                           <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
                             <input
@@ -147,6 +149,7 @@ const Store = () => {
           <Card img={example5} name="Remeras estampadas" price="12200" />
         </article>
       </section>
+      <Footer />
     </main>
   );
 };
