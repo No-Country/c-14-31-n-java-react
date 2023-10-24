@@ -26,6 +26,5 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Product> products;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Order> orders;
+
 }
