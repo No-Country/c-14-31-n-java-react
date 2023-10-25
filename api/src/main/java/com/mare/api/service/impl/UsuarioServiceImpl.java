@@ -2,7 +2,7 @@ package com.mare.api.service.impl;
 
 import com.mare.api.dto.request.UsuarioDto;
 import com.mare.api.dto.request.UsuarioLoginDto;
-import com.mare.api.entity.Usuario;
+import com.mare.api.entity.User;
 import com.mare.api.exception.UsuarioFoundException;
 import com.mare.api.exception.UsuarioNotFoundException;
 import com.mare.api.repository.IUsuarioRepository;
@@ -37,7 +37,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
         RespStandart resp;
 
         chequeoExisteMail(usuarioDto.getEmail());
-        Usuario usuario = mapper.map(usuarioDto, Usuario.class);
+        User usuario = mapper.map(usuarioDto, User.class);
 
         try {
 
@@ -55,7 +55,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public RespStandart loginUsuario(UsuarioLoginDto usuarioLoginDto) {
         RespStandart resp;
-        Usuario usuario = obtenerDatosUsuario(usuarioLoginDto.getEmail());
+        User usuario = obtenerDatosUsuario(usuarioLoginDto.getEmail());
         assert usuario != null;
 
         Boolean loginOk = verificaPass(usuarioLoginDto.getPassword(), usuario.getPassword());
@@ -86,7 +86,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     private void chequeoExisteMail(String email) {
 
-       List<Usuario>listaFiltrada = listaUsuarioFiltrada(email);
+       List<User>listaFiltrada = listaUsuarioFiltrada(email);
        if (listaFiltrada.size()>0 ){
            throw new UsuarioFoundException("El mail ya esta en Uso !!");
        }
@@ -95,10 +95,10 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 
 
-    private Usuario obtenerDatosUsuario(String email) {
-        List<Usuario> lista = listaUsuarioFiltrada(email);
+    private User obtenerDatosUsuario(String email) {
+        List<User> lista = listaUsuarioFiltrada(email);
         if(!(lista.size()==0)){
-            Optional<Usuario> usuarioEncontrado = lista.stream().filter(x -> x.getEmail().equals(email)).findFirst();
+            Optional<User> usuarioEncontrado = lista.stream().filter(x -> x.getEmail().equals(email)).findFirst();
             if(usuarioEncontrado.isPresent()){
                 return usuarioEncontrado.get();
             }
@@ -110,8 +110,8 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
 
-    private List<Usuario> listaUsuarioFiltrada(String email){
-        List<Usuario> usuarioList = usuarioRepository.findAll();
+    private List<User> listaUsuarioFiltrada(String email){
+        List<User> usuarioList = usuarioRepository.findAll();
 
         return usuarioList.stream().filter(x-> x.getEmail().equals(email)).toList();
     }

@@ -29,6 +29,6 @@ public class Product {
     private Category category;
 
     @ManyToOne
-    private Usuario usuario;
+    private User usuario;
 
 }
