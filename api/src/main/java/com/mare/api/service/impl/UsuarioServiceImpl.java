@@ -1,3 +1,5 @@
+
+/*
 package com.mare.api.service.impl;
 
 import com.mare.api.dto.request.UsuarioDto;
@@ -110,3 +112,5 @@ public class UsuarioServiceImpl implements IUsuarioService {
         return usuarioList.stream().filter(x -> x.getEmail().equals(email)).toList();
     }
 }
+
+ */

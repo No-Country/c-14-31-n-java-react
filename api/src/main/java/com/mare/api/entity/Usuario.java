@@ -1,3 +1,4 @@
+/*
 package com.mare.api.entity;
 import com.mare.api.enumeration.RoleName;
 import jakarta.persistence.*;
@@ -24,3 +25,5 @@ public class Usuario {
     private RoleName rol;
 
 }
+
+ */

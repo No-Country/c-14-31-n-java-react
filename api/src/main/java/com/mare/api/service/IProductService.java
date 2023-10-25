@@ -1,9 +1,6 @@
 package com.mare.api.service;
 
 import com.mare.api.entity.Product;
-import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -14,5 +11,7 @@ public interface IProductService {
     void remove(Long id);
     void save(Product product);
     List<Product> getProductsByCategory(Long categoryId);
+    List<Product> getProductsByName(String name);
+    List<Product> searchProductsByName(String name);
 
 }

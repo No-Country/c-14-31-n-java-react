@@ -39,4 +39,15 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> getProductsByCategory(Long categoryId) {
         return iProductRepository.findByCategory_Id(categoryId);
     }
+
+    @Override
+    public List<Product> getProductsByName(String name) {
+        return iProductRepository.findByName(name);
+    }
+
+    @Override
+    public List<Product> searchProductsByName(String name) {
+        // Utiliza una consulta personalizada que busca productos que contengan el nombre proporcionado.
+        return iProductRepository.findByNameContaining(name);
+    }
 }

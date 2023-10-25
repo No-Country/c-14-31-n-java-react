@@ -1,3 +1,4 @@
+/*
 package com.mare.api.repository;
 
 import com.mare.api.entity.Usuario;
@@ -8,3 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
     Usuario findByEmail(String email);
 }
+*/

@@ -46,17 +46,4 @@ public class CategoryController {
         return ResponseEntity.created(new URI("/categories" + dataRegisterCategory.id())).body(dataRegisterCategory);
     }
 
-    @GetMapping("/category/filter/{name}")
-    public ResponseEntity<List<Category>> getAll(@RequestParam(value = "name", required = false) String name) {
-        if (name != null) {
-            // Si se proporciona el parámetro 'name', filtra las categorías por nombre.
-            List<Category> categories = iCategoryService.getCategoriesByName(name);
-            return new ResponseEntity<>(categories, HttpStatus.OK);
-        } else {
-            // Si no se proporciona el parámetro 'name', obtiene todas las categorías.
-            List<Category> categories = iCategoryService.getAll();
-            return new ResponseEntity<>(categories, HttpStatus.OK);
-        }
-    }
-
 }
