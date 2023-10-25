@@ -33,4 +33,12 @@ public class CategoryServiceImpl implements ICategoryService {
     public void save(Category category) {
         iCategoryRepository.save(category);
     }
+
+    @Override
+    public List<Category> getCategoriesByName(String name) {
+        return iCategoryRepository.findAllByName(name);
+
+    }
+
+
 }
