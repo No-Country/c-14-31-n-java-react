@@ -4,7 +4,6 @@ import com.mare.api.entity.Product;
 import com.mare.api.record.DataRegisterProduct;
 import com.mare.api.service.IProductService;
 import jakarta.validation.Valid;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,20 +50,12 @@ public class ProductController {
         return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    //Crea un producto
-    @PostMapping("/created_product")
-    public ResponseEntity<DataRegisterProduct>save(@RequestBody @Valid DataRegisterProduct dataRegisterProduct) throws URISyntaxException {
-        iProductService.save(new Product(dataRegisterProduct));
-        return ResponseEntity.created(new URI("/"+ dataRegisterProduct.id())).body(dataRegisterProduct);
-    }
-
     //Filtro por categoria
     @GetMapping("/products/category/{categoryId}")
     public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) {
         List<Product> products = iProductService.getProductsByCategory(categoryId);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-
 
     //filtro por nombre de producto
     @GetMapping("/products/filter/{name}")
@@ -80,5 +71,25 @@ public class ProductController {
         }
     }
 
-
+    @PostMapping("/created_product")
+    public ResponseEntity<String> save(@RequestBody @Valid DataRegisterProduct dataRegisterProduct) throws URISyntaxException {
+        int featuredProductCount = 0;
+        List<Product> productsFeatured = iProductService.getFeatured();
+        for (Product product : productsFeatured) {
+            Boolean featured = product.getFeatured();
+            featuredProductCount++;
+        }
+        // Verifica si el producto creado tiene featured=true
+        if (featuredProductCount >= 3) {
+            // No permitas crear más de tres productos con featured=true
+            return ResponseEntity.badRequest().body("No se pueden crear más de tres productos DESTACADOS");
+        } else {
+            // Si el producto creado tiene featured=true, incrementa el contador
+           if (dataRegisterProduct.featured()) {
+                iProductService.save(new Product(dataRegisterProduct));
+                featuredProductCount++;
+            }
+        }
+        return ResponseEntity.created(new URI("/" + dataRegisterProduct.id())).body(String.valueOf(dataRegisterProduct));
+    }
 }

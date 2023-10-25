@@ -41,4 +41,5 @@ public class Product {
         this.featured = dataRegisterProduct.featured();
         this.category = new Category(dataRegisterProduct.category());
     }
+
 }
