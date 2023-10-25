@@ -52,4 +52,10 @@ public class ProductController {
         return ResponseEntity.created(new URI("/"+ dataRegisterProduct.id())).body(dataRegisterProduct);
     }
 
+    @GetMapping("/products/category/{categoryId}")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Long categoryId) {
+        List<Product> products = iProductService.getProductsByCategory(categoryId);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
 }

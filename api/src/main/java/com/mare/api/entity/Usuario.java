@@ -23,9 +23,4 @@ public class Usuario {
     private String password;
     private RoleName rol;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Product> products;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Order> orders;
 }
