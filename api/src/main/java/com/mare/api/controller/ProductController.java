@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -24,6 +26,8 @@ public class ProductController {
     @GetMapping("/")
     public ResponseEntity<List<Product>> getAll(){
         List<Product> products = iProductService.getAll();
+
+        Collections.sort(products, Comparator.comparing(Product::getProductEntry).reversed());
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
@@ -80,16 +84,30 @@ public class ProductController {
             featuredProductCount++;
         }
         // Verifica si el producto creado tiene featured=true
-        if (featuredProductCount >= 3) {
+        if (featuredProductCount >= 3 && dataRegisterProduct.featured() ) {
             // No permitas crear más de tres productos con featured=true
             return ResponseEntity.badRequest().body("No se pueden crear más de tres productos DESTACADOS");
         } else {
             // Si el producto creado tiene featured=true, incrementa el contador
-           if (dataRegisterProduct.featured()) {
+           if (!dataRegisterProduct.featured()) {
                 iProductService.save(new Product(dataRegisterProduct));
-                featuredProductCount++;
             }
         }
         return ResponseEntity.created(new URI("/" + dataRegisterProduct.id())).body(String.valueOf(dataRegisterProduct));
+    }
+
+    //Ordenado por precio de mayor a menor
+    @GetMapping("/precio/mayor_a_menor")
+    public ResponseEntity<List<Product>> getAlOrderedHighestLowestPrice(){
+        List<Product> products = iProductService.getAll();
+        Collections.sort(products, Comparator.comparing(Product::getPrice).reversed());
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/precio/menor_a_mayor")
+    public ResponseEntity<List<Product>> getAlOrderedLowestHighestPrice(){
+        List<Product> products = iProductService.getAll();
+        Collections.sort(products, Comparator.comparing(Product::getPrice));
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
