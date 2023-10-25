@@ -14,5 +14,7 @@ public interface IProductService {
     void remove(Long id);
     void save(Product product);
     List<Product> getProductsByCategory(Long categoryId);
+    List<Product> getProductsByName(String name);
+
 
 }
