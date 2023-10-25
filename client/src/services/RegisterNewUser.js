@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseUrl = "localhost:8080/api.mare.com/";
+//const baseUrl = "https://jsonplaceholder.typicode.com/";
 
 export async function newUser(user) {
   try {

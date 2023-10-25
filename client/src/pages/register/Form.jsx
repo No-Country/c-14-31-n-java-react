@@ -87,9 +87,11 @@ const Form = () => {
       timer: 1500,
     });
 
+    //console.log(form);
+
     const response = await newUser(form);
 
-    console.log(response.data);
+    console.log(response);
 
     //try {
     //  let config = {
@@ -133,7 +135,7 @@ const Form = () => {
     "w-11/12 text-center text-sm font-semibold rounded-lg p-2 mb-2 text-white bg-red-500";
   return (
     <form
-      className="w-[21.875rem] pl-5  md:m-auto lg:m-0"
+      className="w-[21.875rem] pl-5 md:m-auto lg:m-0"
       onSubmit={handleSubmit}>
       <label htmlFor="name">
         Nombre <span className="text-red-500">*</span>
