@@ -45,4 +45,9 @@ public class ProductServiceImpl implements IProductService {
         return iProductRepository.findByName(name);
     }
 
+    @Override
+    public List<Product> searchProductsByName(String name) {
+        // Utiliza una consulta personalizada que busca productos que contengan el nombre proporcionado.
+        return iProductRepository.findByNameContaining(name);
+    }
 }

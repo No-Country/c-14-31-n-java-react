@@ -69,13 +69,12 @@ public class ProductController {
     //filtro por nombre de producto
     @GetMapping("/products/filter/{name}")
     public ResponseEntity<List<Product>> getProductsByName(@PathVariable("name") String name) {
-        System.out.println(name);
-        if (name != null) {
-            // Si se proporciona el parámetro 'name', filtra por nombre.
-            List<Product> products = iProductService.getProductsByName(name);
+        if (name != null && !name.isEmpty()) {
+            // Realiza una búsqueda que no requiera coincidencia exacta del nombre.
+            List<Product> products = iProductService.searchProductsByName(name);
             return new ResponseEntity<>(products, HttpStatus.OK);
         } else {
-            // Si no se proporciona el parámetro 'name', obtiene todos productos.
+            // Si no se proporciona el parámetro 'name', obtiene todos los productos.
             List<Product> products = iProductService.getAll();
             return new ResponseEntity<>(products, HttpStatus.OK);
         }
