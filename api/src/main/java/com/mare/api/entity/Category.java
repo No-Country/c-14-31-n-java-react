@@ -1,5 +1,6 @@
 package com.mare.api.entity;
 
+import com.mare.api.record.DataRegisterCategory;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,4 +18,8 @@ public class Category {
     private Long id;
     private String name;
 
+    public Category(DataRegisterCategory dataRegisterCategory){
+        this.id = dataRegisterCategory.id();
+        this.name = dataRegisterCategory.name();
+    }
 }

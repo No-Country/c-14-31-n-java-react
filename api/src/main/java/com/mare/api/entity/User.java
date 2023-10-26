@@ -1,3 +1,5 @@
+
+
 package com.mare.api.entity;
 import com.mare.api.enumeration.RoleName;
 import jakarta.persistence.*;
@@ -6,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -22,9 +24,5 @@ public class User {
     private String phone;
     private String password;
     private RoleName rol;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Product> products;
-
 
 }
