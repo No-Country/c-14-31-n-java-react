@@ -1,5 +1,4 @@
 
-
 package com.mare.api.service.impl;
 
 import com.mare.api.dto.request.UsuarioDto;
@@ -84,22 +83,22 @@ public class UsuarioServiceImpl implements IUsuarioService {
     private void chequeoExisteMail(String email) {
 
 
+
        List<User>listaFiltrada = listaUsuarioFiltrada(email);
        if (listaFiltrada.size()>0 ){
            throw new UsuarioFoundException("El mail ya esta en Uso !!");
        }
 
 
+
     }
-
-
-
 
     private User obtenerDatosUsuario(String email) {
         List<User> lista = listaUsuarioFiltrada(email);
         if(!(lista.size()==0)){
             Optional<User> usuarioEncontrado = lista.stream().filter(x -> x.getEmail().equals(email)).findFirst();
             if(usuarioEncontrado.isPresent()){
+
 
                 return usuarioEncontrado.get();
             }
@@ -112,9 +111,9 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
 
 
+
     private List<User> listaUsuarioFiltrada(String email){
         List<User> usuarioList = usuarioRepository.findAll();
-
 
         return usuarioList.stream().filter(x -> x.getEmail().equals(email)).toList();
     }

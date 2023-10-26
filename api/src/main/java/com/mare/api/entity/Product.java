@@ -31,7 +31,6 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-
     public Product(DataRegisterProduct dataRegisterProduct) {
         this.id = dataRegisterProduct.id();
         this.name = dataRegisterProduct.name();
@@ -46,8 +45,10 @@ public class Product {
         this.productEntry = LocalDate.now(Clock.systemDefaultZone());
     }
 
+
     @ManyToOne
     private User usuario;
+
 
 
 }

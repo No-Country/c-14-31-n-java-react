@@ -29,5 +29,4 @@ public class UsuarioController {
     public ResponseEntity<RespStandart> loginUsuario(@RequestBody UsuarioLoginDto usuarioLoginDto){
         return new ResponseEntity<>(usuarioService.loginUsuario(usuarioLoginDto),  HttpStatus.OK);
     }
-
 }
