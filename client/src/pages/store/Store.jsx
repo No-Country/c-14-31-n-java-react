@@ -1,23 +1,22 @@
 import { useState } from "react";
 import Header from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
-import Card from "../../components/card/Card";
 
-import example1 from "../../assets/img/ExampleCard1.png";
-import example2 from "../../assets/img/ExampleCard2.png";
-import example3 from "../../assets/img/ExampleCard3.png";
-import example4 from "../../assets/img/ExampleCard4.png";
-import example5 from "../../assets/img/ExampleCard5.png";
+//import blusa from "../../assets/img/blusa.png";
+//import remera from "../../assets/img/remera-estampada.png";
+//import pantalon from "../../assets/img/pantalon.png";
+//import vestido from "../../assets/img/vestido.png";
+//import sueter from "../../assets/img/sueter.png";
 
 import useFetchAllCategories from "../../services/useFetchAllCategories";
+import CardStore from "./CardStore";
+import useFetchCategory from "../../services/useFetchCategory";
 
 const Store = () => {
   const [category, setCategory] = useState("");
 
-  //const { allCategories } = useFetchAllCategories();
-
-  //if (!allCategories) return;
-  //console.log(allCategories);
+  const { allCategories } = useFetchAllCategories();
+  const { dataProducts } = useFetchCategory(category);
 
   const handleChangeCategory = (e) => {
     const categoryOption = e.target.value;
@@ -28,10 +27,10 @@ const Store = () => {
     <main className="max-w-screen-2xl m-auto">
       <Header />
       <section className="flex relative ">
-        <article className="w-full absolute md:w-1/4 md:sticky md:top-0 md:bg-secondary-200">
+        <article className="w-full absolute z-40  md:w-1/4 md:sticky md:top-0 md:bg-secondary-200">
           <ul>
             <li className="lg:flex lg:items-center  bg-secondary-200">
-              <details className=" group [&_summary::-webkit-details-marker]:hidden  lg:relative">
+              <details className="group [&_summary::-webkit-details-marker]:hidden  lg:relative">
                 <summary className="group flex items-center justify-between rounded-lg px-4 py-2  text-primary-300 ">
                   <div className="flex items-center gap-2 lg:gap-x-2">
                     <span className="font-medium"> Filtrar </span>
@@ -41,7 +40,7 @@ const Store = () => {
                 <ul>
                   <li className="lg:flex lg:items-center">
                     <details className=" group/categories [&_summary::-webkit-details-marker]:hidden lg:relative">
-                      <summary className="group/categories flex items-center justify-between rounded-lg px-4 py-2  text-primary-300 ">
+                      <summary className="group/categories flex items-center justify-between rounded-lg px-4 py-2 text-primary-300 ">
                         <div className="flex items-center gap-2 lg:gap-x-2">
                           <span className="font-medium"> Categoria </span>
                         </div>
@@ -63,7 +62,22 @@ const Store = () => {
                       </summary>
 
                       <ul className="mt-2 space-y-1 bg-secondary-300 lg:mt-3 lg:w-52 lg:px-3 lg:py-4 lg:absolute lg:bg-neutral-100">
-                        <label htmlFor="remera">
+                        {allCategories?.map((category) => (
+                          <label htmlFor={category.name} key={category.id}>
+                            <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
+                              <input
+                                type="radio"
+                                id={category.name}
+                                name="category"
+                                value={category.id}
+                                className="mx-3"
+                                onChange={handleChangeCategory}
+                              />
+                              {category.name}
+                            </li>
+                          </label>
+                        ))}
+                        {/*<label htmlFor="remera">
                           <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
                             <input
                               type="radio"
@@ -131,7 +145,7 @@ const Store = () => {
                             />
                             Conjuntos
                           </li>
-                        </label>
+                        </label>*/}
                       </ul>
                     </details>
                   </li>
@@ -142,11 +156,9 @@ const Store = () => {
         </article>
 
         <article className="flex flex-wrap justify-center my-14 md:w-3/4">
-          <Card img={example1} name="Blusa Algodon" price="10100" />
-          <Card img={example2} name="Jeans elastizados" price="18500" />
-          <Card img={example3} name="Suéter lanilla" price="8500" />
-          <Card img={example4} name="Vestidos de fibrana" price="18100" />
-          <Card img={example5} name="Remeras estampadas" price="12200" />
+          {dataProducts?.map((product) => (
+            <CardStore key={product.id} product={product} />
+          ))}
         </article>
       </section>
       <Footer />

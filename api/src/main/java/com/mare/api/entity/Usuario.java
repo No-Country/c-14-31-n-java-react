@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "USUARIOS")
+@Table(name = "usuarios")
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
 public class Usuario {
     @Id
@@ -23,9 +23,5 @@ public class Usuario {
     private String password;
     private RoleName rol;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Product> products;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Order> orders;
 }
