@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header
-      className="max-w-screen-2xl h-[4.5625rem] flex justify-between items-center m-auto  relative bg-neutral-50 lg:justify-around"
+      className="max-w-screen-2xl h-[4.5625rem] flex justify-between items-center m-auto relative bg-neutral-50 lg:justify-around"
       ref={menuRef}>
       <div className="w-[13.5rem] h-[4.25rem] mx-3">
         <Link to={"/"}>

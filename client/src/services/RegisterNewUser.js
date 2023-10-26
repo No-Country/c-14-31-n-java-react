@@ -1,13 +1,12 @@
 import axios from "axios";
 
-const baseUrl = "localhost:8080/api.mare.com/";
-//const baseUrl = "https://jsonplaceholder.typicode.com/";
+const baseUrl = "http://localhost:8080/api.mare.com/user/register";
 
 export async function newUser(user) {
   try {
-    const response = await axios.post(`${baseUrl}/usuarios/registro`, user);
+    const response = await axios.post(baseUrl, user);
     return response;
   } catch (error) {
-    console.log(error);
+    return error.response;
   }
 }

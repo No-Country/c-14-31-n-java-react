@@ -3,8 +3,7 @@ import axios from "axios";
 
 const useFetchAllCategories = () => {
   const [allCategories, setAllCategories] = useState();
-  const baseUrl = "http://localhost:8080/";
-  //const baseUrl = "https://jsonplaceholder.typicode.com/posts";
+  const baseUrl = "http://localhost:8080/categories";
 
   useEffect(() => {
     async function getAllCategories() {
