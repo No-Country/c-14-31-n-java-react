@@ -9,23 +9,22 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "USUARIOS")
+@Table(name = "users")
 @Setter @Getter @AllArgsConstructor @NoArgsConstructor
-public class Usuario {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nombre;
-    private String apellido;
+    private String name;
+    private String lastName;
     private String email;
-    private String direccion;
-    private String telefono;
+    private String address;
+    private String phone;
     private String password;
     private RoleName rol;
 
     @OneToMany(mappedBy = "usuario")
     private List<Product> products;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Order> orders;
+
 }

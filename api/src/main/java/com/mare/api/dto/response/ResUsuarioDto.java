@@ -7,11 +7,11 @@ import lombok.Setter;
 @Getter
 public class ResUsuarioDto {
     private Long id;
-    private String nombre;
-    private String apellido;
+    private String name;
+    private String lastName;
     private String email;
-    private String direccion;
-    private String telefono;
+    private String address;
+    private String phone;
     private String password;
 
 }
