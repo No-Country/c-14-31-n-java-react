@@ -10,6 +10,8 @@ const useFetchAllCategories = () => {
       try {
         const response = await axios.get(`${baseUrl}`);
 
+        if (!response) return;
+
         setAllCategories(response.data);
       } catch (error) {
         console.error(error);

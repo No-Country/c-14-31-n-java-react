@@ -2,33 +2,26 @@ import { useState } from "react";
 import Header from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
 
-import blusa from "../../assets/img/blusa.png";
-import remera from "../../assets/img/remera-estampada.png";
-import pantalon from "../../assets/img/pantalon.png";
-import vestido from "../../assets/img/vestido.png";
-import sueter from "../../assets/img/sueter.png";
+//import blusa from "../../assets/img/blusa.png";
+//import remera from "../../assets/img/remera-estampada.png";
+//import pantalon from "../../assets/img/pantalon.png";
+//import vestido from "../../assets/img/vestido.png";
+//import sueter from "../../assets/img/sueter.png";
 
 import useFetchAllCategories from "../../services/useFetchAllCategories";
 import CardStore from "./CardStore";
-import useFetchAllProducts from "../../services/useFetchAllProducts";
+import useFetchCategory from "../../services/useFetchCategory";
 
 const Store = () => {
   const [category, setCategory] = useState("");
 
-  //const { allCategories } = useFetchAllCategories();
-  const { allProducts } = useFetchAllProducts();
-
-  console.log(allProducts);
-  //if (!allCategories) return;
-
-  //console.log(allCategories);
+  const { allCategories } = useFetchAllCategories();
+  const { dataProducts } = useFetchCategory(category);
 
   const handleChangeCategory = (e) => {
     const categoryOption = e.target.value;
     setCategory(categoryOption);
   };
-
-  console.log(category);
 
   return (
     <main className="max-w-screen-2xl m-auto">
@@ -69,7 +62,7 @@ const Store = () => {
                       </summary>
 
                       <ul className="mt-2 space-y-1 bg-secondary-300 lg:mt-3 lg:w-52 lg:px-3 lg:py-4 lg:absolute lg:bg-neutral-100">
-                        {/*{allCategories?.map((category) => (
+                        {allCategories?.map((category) => (
                           <label htmlFor={category.name} key={category.id}>
                             <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
                               <input
@@ -83,8 +76,8 @@ const Store = () => {
                               {category.name}
                             </li>
                           </label>
-                        ))}*/}
-                        <label htmlFor="remera">
+                        ))}
+                        {/*<label htmlFor="remera">
                           <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
                             <input
                               type="radio"
@@ -152,7 +145,7 @@ const Store = () => {
                             />
                             Conjuntos
                           </li>
-                        </label>
+                        </label>*/}
                       </ul>
                     </details>
                   </li>
@@ -163,7 +156,7 @@ const Store = () => {
         </article>
 
         <article className="flex flex-wrap justify-center my-14 md:w-3/4">
-          {allProducts?.map((product) => (
+          {dataProducts?.map((product) => (
             <CardStore key={product.id} product={product} />
           ))}
         </article>
