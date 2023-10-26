@@ -1,4 +1,4 @@
-/*
+
 package com.mare.api.controller;
 
 import com.mare.api.dto.request.UsuarioDto;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api.mera.com/usuarios/")
+@RequestMapping("/api.mare.com/user")
 public class UsuarioController {
 
     @Autowired
     UsuarioServiceImpl usuarioService;
 
-    @PostMapping("/registro")
+    @PostMapping("/register")
     public ResponseEntity<RespStandart> registroUsuario(@RequestBody UsuarioDto usuarioDto){
         return new ResponseEntity<>(usuarioService.registrarUsuario(usuarioDto),  HttpStatus.OK);
     }
@@ -31,4 +31,3 @@ public class UsuarioController {
     }
 
 }
-*/

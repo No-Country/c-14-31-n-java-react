@@ -1,7 +1,6 @@
 package com.mare.api.service.impl;
 
 import com.mare.api.entity.Product;
-import com.mare.api.repository.ICategoryRepository;
 import com.mare.api.repository.IProductRepository;
 import com.mare.api.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ public class ProductServiceImpl implements IProductService {
 
     @Autowired
     private IProductRepository iProductRepository;
+
+    
 
     @Override
     public List<Product> getAll() {

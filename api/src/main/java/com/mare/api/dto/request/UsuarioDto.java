@@ -7,11 +7,11 @@ import lombok.Setter;
 @Setter
 @Getter
 public class UsuarioDto {
-    private String nombre;
-    private String apellido;
+    private String name;
+    private String lastName;
     private String email;
-    private String direccion;
-    private String telefono;
+    private String address;
+    private String phone;
     private String password;
     private RoleName rol = RoleName.ROL_USER;
 
