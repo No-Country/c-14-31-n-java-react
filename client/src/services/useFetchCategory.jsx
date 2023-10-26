@@ -13,18 +13,21 @@ const useFetchCategory = (idCategory) => {
 
       try {
         const response = await axios.get(`${url}`);
+        setLoading(true);
 
         if (!response) return;
 
         setDataProducts(response.data);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     getCategory();
   }, [idCategory]);
 
-  return { dataProducts };
+  return { loading, dataProducts };
 };
 
 export default useFetchCategory;
