@@ -9,4 +9,10 @@ import java.util.List;
 @Repository
 public interface IProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByFeatured(boolean featured);
+
+    List<Product> findByCategory_Id(Long categoryId);
+
+    List<Product> findByName(String name);
+
+    List<Product> findByNameContaining(String name);
 }

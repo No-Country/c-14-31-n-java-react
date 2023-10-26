@@ -1,3 +1,4 @@
+/*
 package com.mare.api.controller;
 
 import com.mare.api.dto.request.UsuarioDto;
@@ -30,3 +31,4 @@ public class UsuarioController {
     }
 
 }
+*/

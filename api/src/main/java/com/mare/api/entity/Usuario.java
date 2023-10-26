@@ -1,3 +1,4 @@
+/*
 package com.mare.api.entity;
 import com.mare.api.enumeration.RoleName;
 import jakarta.persistence.*;
@@ -23,9 +24,6 @@ public class Usuario {
     private String password;
     private RoleName rol;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Product> products;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<Order> orders;
 }
+
+ */
