@@ -44,11 +44,4 @@ public class Product {
         this.category = new Category(dataRegisterProduct.category());
         this.productEntry = LocalDate.now(Clock.systemDefaultZone());
     }
-
-
-    @ManyToOne
-    private User usuario;
-
-
-
 }
