@@ -14,8 +14,12 @@ const Card = (props) => {
       </h3>
       <div className="mx-auto md:inline-block md:ml-32">
         <img src={img} alt="gama colores" className="ml-auto mt-3 md:w-full" />
+    <div>
+      
+    </div>
       </div>
     </div>
+    
   );
 };
 
