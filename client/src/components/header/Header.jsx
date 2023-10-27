@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <header
-      className="max-w-screen-2xl h-[4.5625rem] flex justify-between items-center m-auto  relative bg-neutral-50 lg:justify-around"
+      className="max-w-screen-2xl h-[4.5625rem] flex justify-between items-center m-auto relative bg-neutral-50 lg:justify-around"
       ref={menuRef}>
       <div className="w-[13.5rem] h-[4.25rem] mx-3">
         <Link to={"/"}>
@@ -58,92 +58,62 @@ const Header = () => {
       <nav
         className={`w-3/4 absolute top-[4.5625rem] transition-all duration-500 ease-in-out z-50  bg-neutral-50 ${
           toggleMenu ? "left-0" : "-left-full"
-        } lg:left-0 lg:w-3/4 lg:h-[4.5625rem] lg:top-0 lg:relative lg:flex lg:items-center`}>
-        <ul className="space-y-1 lg:space-y-0 lg:flex lg:w-full lg:justify-evenly">
-          <Link
-            to={"/"}
-            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
-            <span className="font-medium"> Inicio </span>
-          </Link>
+        } lg:left-0 lg:w-3/4 lg:h-[4.5625rem] lg:top-0 lg:relative lg:flex lg:items-center lg:text-sm`}>
+        <ul className="space-y-1 lg:space-y-0 lg:flex lg:w-full xl:justify-between ">
+          <div className="lg:w-3/4 lg:flex lg:justify-center xl:w-4/5">
+            <Link
+              to={"/"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900 ">
+              <span className="font-medium"> Inicio </span>
+            </Link>
 
-          <Link to="/aboutUs" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
-            <span className="font-medium"> Nosotros </span>
-          </Link>
+            <Link
+              to="/aboutUs"
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+              <span className="font-medium"> Nosotros </span>
+            </Link>
 
-          <Link to="/faq" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
-            <span className="font-medium">FAQ</span>
-          </Link>
+            <Link
+              to="/faq"
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+              <span className="font-medium">FAQ</span>
+            </Link>
 
-          <Link
-            to={"/store"}
-            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
-            <span className="font-medium text-primary-500">Tienda</span>
-          </Link>
+            <Link
+              to={"/store"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-neutral-900">
+              <span className="font-medium text-primary-500">Tienda</span>
+            </Link>
 
-          {/*<li className="lg:flex lg:items-center">
-            <details className=" group [&_summary::-webkit-details-marker]:hidden  lg:relative">
-              <summary className="group flex items-center justify-between rounded-lg px-4 py-2  text-primary-300 ">
-                <div className="flex items-center gap-2 lg:gap-x-2">
-                  <span className="font-medium"> Tienda </span>
-                </div>
+            <Link
+              to="/contact"
+              className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative">
+              <span className="font-medium"> Contacto</span>
+            </Link>
+          </div>
 
-                <span
-                  className={`shrink-0 transition duration-300 group-open:-rotate-180  `}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor">
-                    <path
-                      fillRule="evenodd"
-                      d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </summary>
+          <div className="lg:w-2/5 lg:flex lg:justify-around xl:w-1/4">
+            <Link
+              to={"/register"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-md px-4 py-2 text-neutral-900 lg:border lg:border-primary-700 lg:text-white lg:relative  lg:bg-primary-700 lg:hover:text-primary-700 hover:bg-white
+               hover:text-primary-700 transition ease-in-out duration-500 ">
+              <span className="font-medium lg:font-normal">Registrarse</span>
+            </Link>
 
-              <ul className="mt-2 space-y-1 bg-neutral-300   lg:mt-3 lg:w-36 lg:px-3 lg:py-4 lg:absolute lg:bg-neutral-100">
-                <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                  Remeras
-                </li>
-
-                <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                  Camperas
-                </li>
-
-                <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                  Jeans
-                </li>
-                <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                  Pantalones
-                </li>
-
-                <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                  Conjuntos
-                </li>
-              </ul>
-            </details>
-          </li>*/}
-
-          <Link to="/contact" className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
-            <span className="font-medium"> Contacto</span>
-          </Link>
-          <Link
-            to={"/register"}
-            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
-            <span className="font-medium">Registrarse</span>
-          </Link>
-          <Link
-            to={"/login"}
-            className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700 lg:relative ">
-            <span className="font-medium">Inicio de Sesión</span>
-          </Link>
+            <Link
+              to={"/login"}
+              className="flex items-center gap-2 lg:gap-x-1 rounded-md px-4 py-2 text-neutral-900 lg:border lg:border-primary-700 lg:text-white lg:relative  lg:bg-primary-700 lg:hover:text-primary-700 hover:bg-white
+               hover:text-primary-700 transition ease-in-out duration-500 ">
+              <span className="font-medium lg:font-normal">
+                Inicio de Sesión
+              </span>
+            </Link>
+          </div>
 
           {/*<Link
             className="flex items-center gap-2 lg:gap-x-1 rounded-lg px-4 py-2 text-gray-700"
             to={"/register"}>
-            <AiOutlineUser className="text-2xl" />
+            <AiOutlgitineUser className="text-2xl" />
             <span className="font-medium">Mi Cuenta</span>
           </Link>*/}
         </ul>
