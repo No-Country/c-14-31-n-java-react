@@ -4,34 +4,34 @@ import { BiShow } from "react-icons/bi";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { newUser } from "../../services/RegisterNewUser";
 import Swal from "sweetalert2";
+import {
+  initialErrorMessageForm,
+  initialForm,
+  initialSecurityPass,
+} from "./initialValuesForm";
+import { getPasswordStrength } from "../../helpers/getPasswordStrength";
 
 const Form = () => {
-  const initialForm = {
-    nombre: "",
-    apellido: "",
-    direccion: "",
-    telefono: "",
-    email: "",
-    password: "",
-  };
-
   const { getName, errorInput } = useGetName();
 
   const [form, setForm] = useState(initialForm);
   const [isVisiblePass, setIsVisiblePass] = useState(false);
   const [isVisibleConfirm, setIsVisibleConfirm] = useState(false);
   const [confirmPass, setConfirmPass] = useState("");
-  const [errorMessageForm, setErrorMessageForm] = useState({
-    error: false,
-    errorMessage: "",
-  });
+  const [errorMessageForm, setErrorMessageForm] = useState(
+    initialErrorMessageForm
+  );
+  const [securityPass, setSecurityPass] = useState(initialSecurityPass);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
 
-    const inputValue = e.target.value;
+    getName(name, value);
 
-    getName(name, inputValue);
+    if (name === "password") {
+      const securityPass = getPasswordStrength(value);
+      setSecurityPass(securityPass);
+    }
 
     const trimmedValue = value.trim();
 
@@ -79,39 +79,25 @@ const Form = () => {
     //setForm(initialForm);
     //setConfirmPass("");
 
+    //console.log(form);
+    const response = await newUser(form);
+
+    const alert = {
+      icon: "",
+      title: "",
+    };
+
+    response.data.mensaje === "Usuario creado con exito"
+      ? ((alert.icon = "success"), (alert.title = "Usuario Registrado"))
+      : ((alert.icon = "error"), (alert.title = "Email Registrado"));
+
     Swal.fire({
       position: "center",
-      icon: "success",
-      title: "Usuario Registrado",
+      icon: `${alert.icon}`,
+      title: `${alert.title}`,
       showConfirmButton: false,
       timer: 1500,
     });
-
-    const response = await newUser(form);
-
-    console.log(response.data);
-
-    //try {
-    //  let config = {
-    //    method: "POST",
-    //    headers: {
-    //      Accept: "application/json",
-    //      "Content-Type": "application/json",
-    //    },
-    //    body: JSON.stringify(form),
-    //  };
-
-    //  let res = await fetch(
-    //    "localhost:8080/api.mare.com/usuarios/registro",
-    //    config
-    //  );
-
-    //  let user = await res.json();
-
-    //  console.log(user);
-    //} catch (error) {
-    //  console.log(error);
-    //}
   };
 
   const handleIsVisiblePass = () => {
@@ -131,16 +117,17 @@ const Form = () => {
 
   const styleErrorInput =
     "w-11/12 text-center text-sm font-semibold rounded-lg p-2 mb-2 text-white bg-red-500";
+
   return (
     <form
-      className="w-[21.875rem] pl-5  md:m-auto lg:m-0"
+      className="w-[21.875rem] pl-5 md:m-auto lg:m-0"
       onSubmit={handleSubmit}>
       <label htmlFor="name">
         Nombre <span className="text-red-500">*</span>
         <input
           type="text"
           id="name"
-          name="nombre"
+          name="name"
           value={form.nombre}
           className={`${styleClass} ${
             errorInput.name.error ? styleClassInvalid : styleClassSuccess
@@ -161,7 +148,7 @@ const Form = () => {
         <input
           type="text"
           id="lastName"
-          name="apellido"
+          name="lastName"
           value={form.apellido}
           maxLength={30}
           className={`${styleClass} ${
@@ -185,7 +172,7 @@ const Form = () => {
         <input
           type="text"
           id="address"
-          name="direccion"
+          name="address"
           value={form.direccion}
           maxLength={50}
           className={`${styleClass} ${
@@ -209,7 +196,7 @@ const Form = () => {
         <input
           type="text"
           id="phone"
-          name="telefono"
+          name="phone"
           value={form.telefono}
           className={`${styleClass} ${
             errorInput.phone.error ? styleClassInvalid : styleClassSuccess
@@ -265,10 +252,23 @@ const Form = () => {
           <span
             className="absolute right-7 bottom-6 text-2xl xl:right-3"
             onClick={handleIsVisiblePass}>
-            {!isVisiblePass ? <BiShow /> : <AiOutlineEyeInvisible />}
+            {isVisiblePass ? (
+              <BiShow className="text-primary-700" />
+            ) : (
+              <AiOutlineEyeInvisible className="text-primary-700" />
+            )}
           </span>
         </label>
       </div>
+      {securityPass.message.length > 1 && (
+        <div
+          role="alert"
+          className={`rounded border-s-4 ${securityPass.strong} p-4 ${securityPass.background}`}>
+          <p className={`block font-medium ${securityPass.text}`}>
+            Nivel de contraseña {securityPass.message}
+          </p>
+        </div>
+      )}
       {errorInput.password.error && (
         <p className={`${styleErrorInput}`}>
           {errorInput.password.messageError}
@@ -293,7 +293,11 @@ const Form = () => {
           <span
             className="absolute right-7 bottom-6 text-2xl xl:right-3"
             onClick={handleIsVisibleConfirm}>
-            {!isVisibleConfirm ? <BiShow /> : <AiOutlineEyeInvisible />}
+            {isVisibleConfirm ? (
+              <BiShow className="text-primary-700" />
+            ) : (
+              <AiOutlineEyeInvisible className="text-primary-700" />
+            )}
           </span>
         </label>
       </div>
