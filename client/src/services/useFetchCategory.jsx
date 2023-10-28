@@ -1,15 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const useFetchCategory = (idCategory) => {
+const useFetchCategory = (idCategory, price) => {
   const [dataProducts, setDataProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  //const [url, setUrl] = useState(second);
 
   useEffect(() => {
     const getCategory = async () => {
-      const url = `http://localhost:8080/${
-        idCategory ? `products/category/${idCategory}` : ""
-      }`;
+      let url = "";
+
+      if (idCategory) {
+        url = `http://localhost:8080/${
+          idCategory === "all" ? "" : `products/category/${idCategory}`
+        }`;
+      }
+
+      if (price) {
+        url = `http://localhost:8080/precio/${price}`;
+      }
 
       try {
         const response = await axios.get(`${url}`);
@@ -25,7 +34,7 @@ const useFetchCategory = (idCategory) => {
       }
     };
     getCategory();
-  }, [idCategory]);
+  }, [idCategory, price]);
 
   return { loading, dataProducts };
 };

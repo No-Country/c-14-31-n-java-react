@@ -33,11 +33,9 @@ const Form = () => {
       setSecurityPass(securityPass);
     }
 
-    const trimmedValue = value.trim();
-
     setForm({
       ...form,
-      [name]: trimmedValue,
+      [name]: value,
     });
   };
 
@@ -76,11 +74,21 @@ const Form = () => {
 
     setErrorMessageForm({ error: false, errorMessage: "" });
 
-    //setForm(initialForm);
-    //setConfirmPass("");
+    setForm(initialForm);
+    setConfirmPass("");
+    setSecurityPass(initialSecurityPass);
 
-    //console.log(form);
-    const response = await newUser(form);
+    const formWithoutSpaces = {
+      name: form.name.trim(),
+      lastName: form.lastName.trim(),
+      address: form.address.trim(),
+      phone: form.phone,
+      email: form.email,
+      password: form.password,
+    };
+
+    //console.log(formWithoutSpaces);
+    const response = await newUser(formWithoutSpaces);
 
     const alert = {
       icon: "",
@@ -109,7 +117,7 @@ const Form = () => {
   };
 
   const styleClass =
-    "w-[19.375rem] h-[2.875rem] xl:w-[590px] p-2 mt-1 mb-3 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 ";
+    "w-[19.375rem] h-[2.875rem] xl:w-[590px] p-2 mt-1 mb-3 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-500";
 
   const styleClassSuccess = "valid:border-green-600 focus:outline-none";
 
@@ -128,7 +136,7 @@ const Form = () => {
           type="text"
           id="name"
           name="name"
-          value={form.nombre}
+          value={form.name}
           className={`${styleClass} ${
             errorInput.name.error ? styleClassInvalid : styleClassSuccess
           }`}
@@ -149,7 +157,7 @@ const Form = () => {
           type="text"
           id="lastName"
           name="lastName"
-          value={form.apellido}
+          value={form.lastName}
           maxLength={30}
           className={`${styleClass} ${
             errorInput.lastName.error ? styleClassInvalid : styleClassSuccess
@@ -173,7 +181,7 @@ const Form = () => {
           type="text"
           id="address"
           name="address"
-          value={form.direccion}
+          value={form.address}
           maxLength={50}
           className={`${styleClass} ${
             errorInput.address.error ? styleClassInvalid : styleClassSuccess
@@ -197,7 +205,7 @@ const Form = () => {
           type="text"
           id="phone"
           name="phone"
-          value={form.telefono}
+          value={form.phone}
           className={`${styleClass} ${
             errorInput.phone.error ? styleClassInvalid : styleClassSuccess
           }`}
