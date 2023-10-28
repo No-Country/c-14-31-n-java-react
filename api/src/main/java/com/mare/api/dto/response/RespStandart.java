@@ -6,9 +6,14 @@ import lombok.Setter;
 @Setter @Getter
 public class RespStandart {
 
+
+    public RespStandart() {
+    }
+
     public RespStandart(String mensaje) {
         this.mensaje = mensaje;
     }
+
 
     private String mensaje;
 }
