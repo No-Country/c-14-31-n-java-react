@@ -22,19 +22,80 @@ const Login = () => {
       document.getElementById("form-message").classList.add("hidden");
       document.getElementById("form-message").classList.remove("block");
 
-      const response = await axios.post(
-        "localhost:8080/api.mare.com/usuarios/login",
-        {
+
+      /* const response = await fetch("http://localhost:8080/api.mare.com/user/login", {
+        method: "POST",
+        header: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           email,
-          password,
-        }
-      );
+          password
+        }),
+      });
       if (response.status === 200) {
         console.log("Inicio de sesion exitoso");
       } else {
         console.log("No fue exitoso el inicio de sesion");
       }
-      console.log(response.status);
+      console.log(response.status); */
+      /* axios.post('http://localhost:8080/api.mare.com/user/login', {
+        email: email,
+        password: password
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      }); */
+
+      const respuesta = await fetch('http://localhost:8080/api.mare.com/user/login');
+      console.log(respuesta);
+      if(respuesta.status===200) console.log("Login activo url");
+      console.log("no activo");
+
+
+      /* const url = "http://localhost:8080/api.mare.com/user/login";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: "correo@correo.com",
+          password: "123456",
+        }),
+      });
+
+      if (response.status === 200) {
+        console.log("Login activo url");
+      } else {
+        console.log("no activo");
+      } */
+
+
+
+
+
+      /* try {
+        const request = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password
+          })
+        };
+        const response = await fetch("/api.mare.com/usuarios/login", request);
+        const data = await response.json();
+        console.log(data);
+      } catch (error) { setError(error.message); }  */
+
+
+
     } else {
       console.log("Login invalido");
       document.getElementById("form-message").classList.remove("hidden");
