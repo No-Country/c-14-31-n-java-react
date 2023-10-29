@@ -36,7 +36,6 @@ const useGetName = () => {
       messageError: "El password no es el mismo",
     },
   };
-
   const [errorInput] = useState(error);
 
   function getName(name, inputValue) {
@@ -46,19 +45,19 @@ const useGetName = () => {
     const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const regexPass = /^[^<>]*$/;
 
-    if (name === "nombre") {
+    if (name === "name") {
       const isNameValid = !regexName.test(inputValue);
       errorInput.name.error = isNameValid;
     }
-    if (name === "apellido") {
+    if (name === "lastName") {
       const isNameValid = !regexName.test(inputValue);
       errorInput.lastName.error = isNameValid;
     }
-    if (name === "direccion") {
+    if (name === "address") {
       const isNameValid = !regexAddress.test(inputValue);
       errorInput.address.error = isNameValid;
     }
-    if (name === "telefono") {
+    if (name === "phone") {
       const isNameValid = !regexPhone.test(inputValue);
       errorInput.phone.error = isNameValid;
     }
