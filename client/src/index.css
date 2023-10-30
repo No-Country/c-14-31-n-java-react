@@ -70,3 +70,23 @@
     transform: rotate(-90deg);
   }
 }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #cda1a4;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #3d1518;
+    border-radius: 100vh;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #852e34;
+  }
+}

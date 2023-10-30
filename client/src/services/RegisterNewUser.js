@@ -5,9 +5,8 @@ const baseUrl = "http://localhost:8080/api.mare.com/user/register";
 export async function newUser(user) {
   try {
     const response = await axios.post(baseUrl, user);
-    console.log(response);
     return response;
   } catch (error) {
-    return error.response;
+    return error.response.data;
   }
 }

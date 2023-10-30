@@ -74,9 +74,9 @@ const Form = () => {
 
     setErrorMessageForm({ error: false, errorMessage: "" });
 
-    setForm(initialForm);
-    setConfirmPass("");
-    setSecurityPass(initialSecurityPass);
+    //setForm(initialForm);
+    //setConfirmPass("");
+    //setSecurityPass(initialSecurityPass);
 
     const formWithoutSpaces = {
       name: form.name.trim(),
@@ -97,7 +97,7 @@ const Form = () => {
 
     response.data.mensaje === "Usuario creado con exito"
       ? ((alert.icon = "success"), (alert.title = "Usuario Registrado"))
-      : ((alert.icon = "error"), (alert.title = "Email Registrado"));
+      : ((alert.icon = "error"), (alert.title = "El email ya esta en uso "));
 
     Swal.fire({
       position: "center",
