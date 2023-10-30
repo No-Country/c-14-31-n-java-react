@@ -7,6 +7,6 @@ export async function newUser(user) {
     const response = await axios.post(baseUrl, user);
     return response;
   } catch (error) {
-    return error.response;
+    return error.response.data;
   }
 }
