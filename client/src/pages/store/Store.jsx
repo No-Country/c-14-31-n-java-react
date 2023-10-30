@@ -1,231 +1,354 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Header from "../../components/header/Header";
 import { Footer } from "../../components/footer/Footer";
+import { RiArrowRightSLine, RiFilter2Fill } from "react-icons/ri";
 
 import useFetchAllCategories from "../../services/useFetchAllCategories";
 import CardStore from "./CardStore";
-import useFetchCategory from "../../services/useFetchCategory";
-//import useOrderPrice from "../../services/useOrderPrice";
+import useFetchCategory from "../../services/useFetchFilterCategories";
+import Modal from "./Modal";
+import { useModal } from "../../hooks/useModal";
 
 const Store = () => {
-  const [category, setCategory] = useState("");
+  const initialToggle = {
+    categories: true,
+    category: false,
+    price: false,
+  };
+  const initialSearchProduct = { product: "" };
+  const [category, setCategory] = useState("all");
   const [price, setPrice] = useState("");
+  const [toggleCategories, setToggleCategories] = useState(initialToggle);
+  const [filterPrice, setFilterPrice] = useState([]);
+  const [inputSearch, setInputSearch] = useState(initialSearchProduct);
+  const [searchProduct, setSearchProduct] = useState("");
+  const [infoModal, setInfoModal] = useState([]);
+  const [errorInput, setErrorInput] = useState(false);
+  const [notFoundProduct, setNotFoundProduct] = useState(false);
 
   const { allCategories } = useFetchAllCategories();
-  //const { orderPrice } = useOrderPrice(price);
+  const { loading, dataProducts } = useFetchCategory(category, searchProduct);
 
-  const { loading, dataProducts } = useFetchCategory(category, price);
+  const { isOpen, openModal, closeModal } = useModal();
+
+  const inputRef = useRef();
 
   const handleChangeCategory = (e) => {
     const categoryOption = e.target.value;
     setCategory(categoryOption);
   };
 
-  //const handleChangePrice = (e) => {
-  //  const optionPrice = e.target.value;
-  //  setPrice(optionPrice);
-  //};
+  const handleChangePrice = (e) => {
+    const optionPrice = e.target.value;
+    setPrice(optionPrice);
+  };
+
+  useEffect(() => {
+    setFilterPrice(dataProducts);
+
+    const getFilterPrice = () => {
+      let newFilter = [];
+      if (price === "mayor_a_menor") {
+        newFilter = dataProducts.toSorted((a, b) => b.price - a.price);
+        setFilterPrice(newFilter);
+      }
+
+      if (price === "menor_a_mayor") {
+        newFilter = dataProducts.toSorted((a, b) => a.price - b.price);
+        setFilterPrice(newFilter);
+      }
+
+      if (price === "reset") {
+        setToggleCategories({
+          ...toggleCategories,
+          price: false,
+        });
+      }
+    };
+
+    getFilterPrice();
+  }, [dataProducts, price]);
+
+  useEffect(() => {
+    let timer;
+
+    if (searchProduct.length > 0 && dataProducts.length < 1) {
+      console.log("No hay productos");
+      setNotFoundProduct(true);
+
+      timer = setTimeout(() => {
+        setNotFoundProduct(false);
+        setSearchProduct("");
+      }, 3000);
+    }
+
+    return () => clearTimeout(timer);
+  }, [searchProduct, dataProducts]);
+
+  const handleToggleFilter = (filter) => {
+    setToggleCategories({
+      ...toggleCategories,
+      [filter]: !toggleCategories[filter],
+    });
+  };
+
+  const handleInputSearch = (e) => {
+    const { name, value } = e.target;
+    setErrorInput(false);
+
+    setInputSearch({
+      ...inputSearch,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!inputSearch.product) {
+      return setErrorInput(true);
+    }
+
+    setSearchProduct(inputSearch.product);
+    setCategory("all");
+    setInputSearch(initialSearchProduct);
+    inputRef.current.focus();
+    setToggleCategories({
+      ...toggleCategories,
+      categories: false,
+    });
+  };
+
+  const handleInfoModal = (infoProduct) => {
+    openModal();
+    setInfoModal(infoProduct);
+  };
+
+  let textFilter = toggleCategories.categories
+    ? "Ocultar Filtro"
+    : "Mostrar Filtro";
 
   return (
-    <main className="max-w-screen-2xl m-auto">
+    <main className="max-w-screen-2xl  m-auto relative">
       <Header />
-      <section className="h-[650px] flex relative lg:h-[835px]">
-        <article className="w-full absolute z-40  md:w-1/4 md:sticky md:top-0 md:bg-secondary-200">
-          <ul>
-            <li className="lg:flex lg:items-center  bg-secondary-200">
-              <details className="group [&_summary::-webkit-details-marker]:hidden  lg:relative">
-                <summary className="group flex items-center justify-between rounded-lg px-4 py-2  text-primary-300 ">
-                  <div className="flex items-center gap-2 lg:gap-x-2">
-                    <span className="font-medium"> Filtrar </span>
-                  </div>
-                </summary>
+      <section className="lg:flex">
+        <article className="w-full font-nunito lg:w-1/3 lg:flex lg:justify-center  bg-neutral-200 ">
+          <div className="lg:w-full bg-neutral-50 ">
+            <div className="h-52 my-5 ">
+              <h4 className="text-center my-1 text-lg font-semibold">
+                Encuentra el producto de tu agrado.
+              </h4>
+              <form
+                className="w-full h-48 flex flex-col items-center justify-evenly "
+                onSubmit={handleSubmit}>
+                <label
+                  htmlFor="Username"
+                  className="relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                  <input
+                    type="text"
+                    id="Username"
+                    name="product"
+                    className="w-52 h-9 px-2 peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0"
+                    placeholder="Username"
+                    ref={inputRef}
+                    value={inputSearch.product}
+                    autoComplete="off"
+                    onChange={handleInputSearch}
+                  />
 
-                <ul>
-                  <li className="lg:flex lg:items-center">
-                    <details className=" group/categories [&_summary::-webkit-details-marker]:hidden lg:relative">
-                      <summary className="group/categories flex items-center justify-between rounded-lg px-4 py-2 text-primary-300 ">
-                        <div className="flex items-center gap-2 lg:gap-x-2">
-                          <span className="font-medium"> Categoria </span>
-                        </div>
+                  <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                    Nombre del producto
+                  </span>
 
-                        <span
-                          className={`shrink-0 transition duration-300 group-open/categories:-rotate-180  `}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path
-                              fillRule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </span>
-                      </summary>
+                  <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
+                    <span className="sr-only">Search</span>
 
-                      <ul className="mt-2 space-y-1 bg-secondary-300 lg:mt-3 lg:w-52 lg:px-3 lg:py-4 lg:absolute lg:bg-neutral-100">
-                        {allCategories?.map((category) => (
-                          <label htmlFor={category.name} key={category.id}>
-                            <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                              <input
-                                type="radio"
-                                id={category.name}
-                                name="category"
-                                value={category.id}
-                                className="mx-3"
-                                onChange={handleChangeCategory}
-                              />
-                              {category.name}
-                            </li>
-                          </label>
-                        ))}
-                        {/*<label htmlFor="remera">
-                          <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                            <input
-                              type="radio"
-                              id="remera"
-                              name="category"
-                              value="remera"
-                              className="mx-3"
-                              onChange={handleChangeCategory}
-                            />
-                            Remera
-                          </li>
-                        </label>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      className="h-4 w-4">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                      />
+                    </svg>
+                  </span>
+                </label>
 
-                        <label htmlFor="camperas">
-                          <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                            <input
-                              type="radio"
-                              id="camperas"
-                              name="category"
-                              value="campera"
-                              className="mx-3"
-                              onChange={handleChangeCategory}
-                            />
-                            Camperas
-                          </li>
-                        </label>
+                {errorInput && (
+                  <p className="w-11/12 text-center text-sm font-semibold rounded-lg p-2 m-1 text-white bg-red-500">
+                    Escribe el nombre del producto por favor.
+                  </p>
+                )}
 
-                        <label htmlFor="jeans">
-                          <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                            <input
-                              type="radio"
-                              id="jeans"
-                              name="category"
-                              value="jeans"
-                              className="mx-3"
-                              onChange={handleChangeCategory}
-                            />
-                            Jeans
-                          </li>
-                        </label>
+                <button
+                  type="submit"
+                  className="w-40 h-10 rounded-md bg-primary-700 text-white hover:bg-white hover:border border-primary-700 hover:text-primary-700 hover:font-bold transition ease-in-out duration-500
+                  ">
+                  Buscar
+                </button>
+                <button
+                  type="button"
+                  className="w-40 h-10 rounded-md bg-primary-700 text-white hover:bg-white hover:border border-primary-700 hover:text-primary-700 hover:font-bold transition ease-in-out duration-500
+                  "
+                  onClick={() => setSearchProduct("")}>
+                  Todos los productos
+                </button>
+              </form>
+            </div>
+            <div
+              className="flex items-center bg-neutral-200 text-xl p-3 transition duration-300 ease-in"
+              onClick={() => handleToggleFilter("categories")}>
+              <h4 className={`pr-3 font-semibold`}>{textFilter}</h4>
+              <RiFilter2Fill />
+            </div>
 
-                        <label htmlFor="pantalones">
-                          <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                            <input
-                              type="radio"
-                              id="pantalones"
-                              name="category"
-                              value="pantalones"
-                              className="mx-3"
-                              onChange={handleChangeCategory}
-                            />
-                            Pantalones
-                          </li>
-                        </label>
+            <div
+              className={`${
+                !toggleCategories.categories ? "hidden" : "block"
+              }`}>
+              <div>
+                <div
+                  className="w-full flex items-center"
+                  onClick={() => handleToggleFilter("category")}>
+                  <h4 className="font-semibold p-2 ">Categorias</h4>
+                  <RiArrowRightSLine
+                    className={`transition ease-in duration-150 ${
+                      toggleCategories.category
+                        ? "transform rotate-90"
+                        : "transform rotate-0"
+                    }`}
+                  />
+                </div>
+                <ul
+                  className={`${
+                    !toggleCategories.category ? "hidden" : "block"
+                  }`}>
+                  <li>
+                    <label htmlFor="all">
+                      <input
+                        id="all"
+                        type="radio"
+                        name="category"
+                        value="all"
+                        className="mx-2"
+                        checked={category === "all" ? true : false}
+                        onChange={handleChangeCategory}
+                      />
+                      Todos las categorias
+                    </label>
+                  </li>
+                  {allCategories?.map((category) => (
+                    <li key={category.id}>
+                      <label htmlFor={category.name}>
+                        <input
+                          type="radio"
+                          name="category"
+                          id={category.name}
+                          value={category.id}
+                          className="mx-2"
+                          onChange={handleChangeCategory}
+                        />
+                        {category.name}
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                        <label htmlFor="conjuntos">
-                          <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                            <input
-                              type="radio"
-                              id="conjuntos"
-                              name="category"
-                              value="conjuntos"
-                              className="mx-3"
-                              onChange={handleChangeCategory}
-                            />
-                            Conjuntos
-                          </li>
-                        </label>*/}
-                      </ul>
-                    </details>
+              <div>
+                <div
+                  className="w-full flex items-center"
+                  onClick={() => handleToggleFilter("price")}>
+                  <h4 className="font-semibold p-2">Precios</h4>
+                  <RiArrowRightSLine
+                    className={`transition ease-in duration-150 ${
+                      toggleCategories.price
+                        ? "transform rotate-90"
+                        : "transform rotate-0"
+                    }`}
+                  />
+                </div>
+                <ul
+                  className={`${!toggleCategories.price ? "hidden" : "block"}`}>
+                  <li>
+                    <label htmlFor="high">
+                      <input
+                        id="high"
+                        type="radio"
+                        name="price"
+                        className="mx-2"
+                        value="mayor_a_menor"
+                        checked={price === "mayor_a_menor" ? true : false}
+                        onChange={handleChangePrice}
+                      />
+                      Orden de mayor a menor
+                    </label>
+                  </li>
+                  <li>
+                    <label htmlFor="low">
+                      <input
+                        id="low"
+                        type="radio"
+                        name="price"
+                        className="mx-2"
+                        value="menor_a_mayor"
+                        checked={price === "menor_a_mayor" ? true : false}
+                        onChange={handleChangePrice}
+                      />
+                      Orden de menor a mayor
+                    </label>
+                  </li>
+                  <li>
+                    <label htmlFor="reset">
+                      <input
+                        id="reset"
+                        type="radio"
+                        name="price"
+                        className="mx-2"
+                        value="reset"
+                        checked={toggleCategories.price ? false : true}
+                        onChange={handleChangePrice}
+                      />
+                      Quitar filtro precio
+                    </label>
                   </li>
                 </ul>
-
-                {/*<ul>
-                  <li className="lg:flex lg:items-center">
-                    <details className=" group/price [&_summary::-webkit-details-marker]:hidden lg:relative">
-                      <summary className="group/price flex items-center justify-between rounded-lg px-4 py-2 text-primary-300 ">
-                        <div className="flex items-center gap-2 lg:gap-x-2">
-                          <span className="font-medium"> Precios </span>
-                        </div>
-
-                        <span
-                          className={`shrink-0 transition duration-300 group-open/price:-rotate-180  `}>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-5 w-5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path
-                              fillRule="evenodd"
-                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                        </span>
-                      </summary>
-
-                      <ul className="mt-2 space-y-1 bg-secondary-300 lg:mt-3 lg:w-52 lg:px-3 lg:py-4 lg:absolute lg:bg-neutral-100">
-                        <label htmlFor="mayor">
-                          <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                            <input
-                              type="radio"
-                              id="mayor"
-                              name="price"
-                              value="mayor_a_menor"
-                              className="mx-3"
-                              onChange={handleChangePrice}
-                            />
-                            Mayor a menor
-                          </li>
-                        </label>
-
-                        <label htmlFor="menor">
-                          <li className="block px-5 py-2 text-sm font-medium text-gray-500 hover:bg-neutral-200 hover:text-gray-700">
-                            <input
-                              type="radio"
-                              id="menor"
-                              name="price"
-                              value="menor_a_mayor"
-                              className="mx-3"
-                              onChange={handleChangePrice}
-                            />
-                            Menor a mayor
-                          </li>
-                        </label>
-                      </ul>
-                    </details>
-                  </li>
-                </ul>*/}
-              </details>
-            </li>
-          </ul>
+              </div>
+            </div>
+          </div>
         </article>
-
         {loading ? (
           <div className="w-full h-[530px] md:h-[830px] grid place-content-center  bg-primary-100">
             <span className="loader "></span>
           </div>
         ) : (
-          <article className="h-[600px] overflow-hidden overflow-y-auto flex flex-wrap justify-center my-14 md:w-3/4 lg:h-[750px]">
-            {dataProducts?.map((product) => (
-              <CardStore key={product.id} product={product} />
-            ))}
+          <article className="h-[600px] m-auto my-4 overflow-hidden overflow-y-auto scrollbar flex flex-wrap justify-center lg:w-3/4  lg:h-[750px] lg:my-0 lg:justify-evenly xl:h-[825px]  bg-primary-900">
+            {notFoundProduct ? (
+              <div className="w-full h-96 grid place-content-center">
+                <p className="text-3xl text-white font-bold">
+                  Producto no encontrado
+                </p>
+              </div>
+            ) : (
+              <>
+                {filterPrice?.map((product) => (
+                  <CardStore
+                    key={product.id}
+                    product={product}
+                    handleInfoModal={handleInfoModal}
+                  />
+                ))}
+              </>
+            )}
           </article>
         )}
+
+        {isOpen && <Modal infoModal={infoModal} closeModal={closeModal} />}
       </section>
       <Footer />
     </main>

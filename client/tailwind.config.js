@@ -41,6 +41,15 @@ export default {
         "secondary-800": "#786555",
         "secondary-900": "#5c4d41",
       },
+      plugins: [
+        require('flowbite/plugin')
+      ],
+      theme: {
+        extend: {},
+      },
+      content: [
+        'node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}'
+    ]
     },
   },
   plugins: [],
