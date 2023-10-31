@@ -6,6 +6,7 @@ import com.mare.api.dto.request.UsuarioLoginDto;
 import com.mare.api.entity.User;
 import com.mare.api.exception.UsuarioFoundException;
 import com.mare.api.exception.UsuarioNotFoundException;
+import com.mare.api.record.DataUser;
 import com.mare.api.repository.IUsuarioRepository;
 import com.mare.api.dto.response.RespStandart;
 
@@ -53,17 +54,17 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public RespStandart loginUsuario(UsuarioLoginDto usuarioLoginDto) {
-        RespStandart resp;
+    public DataUser loginUsuario(UsuarioLoginDto usuarioLoginDto) {
+        DataUser resp;
         User usuario = obtenerDatosUsuario(usuarioLoginDto.getEmail());
         assert usuario != null;
 
         Boolean loginOk = verificaPass(usuarioLoginDto.getPassword(), usuario.getPassword());
         System.out.println(loginOk);
         if (loginOk) {
-            resp = new RespStandart("login Exitoso");
+            resp = new DataUser(usuario.getId(), usuario.getName(), "Registro exitoso");
         } else {
-            resp = new RespStandart("Contraseña Incorrecta");
+            resp = new DataUser(0L, null,"Contraseña Incorrecta");
         }
 
 
