@@ -92,7 +92,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <div className="lg:w-2/5 lg:flex lg:justify-around xl:w-1/4">
+          <div className="lg:w-2/5 lg:flex lg:justify-around 2xl:w-1/4">
             <Link
               to={"/register"}
               className="flex items-center gap-2 lg:gap-x-1 rounded-md px-4 py-2 text-neutral-900 lg:border lg:border-primary-700 lg:text-white lg:relative  lg:bg-primary-700 lg:hover:text-primary-700 hover:bg-white
