@@ -1,0 +1,52 @@
+[
+    {
+        "id": "1",
+        "title": "¿Cómo puedo realizar un pedido?",
+        "description": "Accede a la tienda online y busca los productos que quieres comprar. Puedes navegar por las categorías o utilizar el buscador para encontrar lo que buscas."
+    },
+    {
+        "id": "2",
+        "title": "¿Quién se encarga de mi pedido?",
+        "description": "Nuestro equipo de atencion al cliente se encarga de hacer el seguimiento del pedido hasta la entrega al domicilio registrado"
+    },
+    {
+        "id": "3",
+        "title": "¿Cuáles son los métodos de pago aceptados?",
+        "description": "Por ahora solo con paypal..."
+    },
+    {
+        "id": "4",
+        "title": "¿Cuánto tarda en llegar mi pedido?",
+        "description": "En general, los pedidos tardan entre 2 y 10 días en llegar al comprador. Sin embargo, hay casos en los que el pedido puede tardar más por temporadas de mayor demanda"
+    },
+    {
+        "id": "5",
+        "title": "¿Ofrecen garantía?",
+        "description": "Sí, la garantía es un derecho de nuestros consumidor que protege a los compradores de productos defectuosos o que no cumplen con las expectativas."
+    },
+    {
+        "id": "6",
+        "title": "¿Puedo devolver un producto?",
+        "description": "Sí, de acuerdo a nuestras politicas de servicio y si tiene problemas con esto contacte a nuestro servicio de atencion al cliente"
+    },
+    {
+        "id": "7",
+        "title": "¿Cómo puedo devolver un producto?",
+        "description": "Contacte con nuestro servicio de atencio al cliente"
+    },
+    {
+        "id": "8",
+        "title": "¿Cómo puedo contactar con el servicio de atención al cliente?",
+        "description": "Mediante este numero +##-###-### o en la seccion de contacto, verifique los terminos y condiciones de nuestro servicio"
+    },
+    {
+        "id": "9",
+        "title": "¿Cuál es la política de garantía?",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, sint tempora! Itaque iste ut, repellat veniam voluptatum quidem eveniet porro nemo eius ea facilis magni magnam corrupti omnis modi vel."
+    },
+    {
+        "id": "10",
+        "title": "¿Puedo recibir informacion regular en mi buzón de correo eléctronico con todo lo nuevo de la web?",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, sint tempora! Itaque iste ut, repellat veniam voluptatum quidem eveniet porro nemo eius ea facilis magni magnam corrupti omnis modi vel."
+    }
+]
