@@ -55,7 +55,7 @@ const HomeBody = () => {
           )}
 
           {featured?.map((product) => (
-            <CardStore key={product.id} product={product} />
+            <CardStore key={product.id} product={product} home={true}/>
           ))}
           {/*<Card img={example1} name="Blusa Algodon" price="10100" />
           <Card img={example2} name="Jeans elastizados" price="18500" />
