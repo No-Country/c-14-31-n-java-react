@@ -4,9 +4,8 @@ import { useState } from "react";
 import { BiError } from "react-icons/bi";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import Header from "../../components/header/Header";
-import axios from "axios";
 
-const Login = () => {
+const Login = () => {  
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,90 +13,42 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email) &&
-      /^.{6,12}$/.test(password)
-    ) {
-      console.log("Login valido");
+    if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email) && /^.{6,12}$/.test(password)) {
+      console.log("Campos rellenados");
       document.getElementById("form-message").classList.add("hidden");
       document.getElementById("form-message").classList.remove("block");
-
-
-      /* const response = await fetch("http://localhost:8080/api.mare.com/user/login", {
-        method: "POST",
-        header: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password
-        }),
-      });
-      if (response.status === 200) {
-        console.log("Inicio de sesion exitoso");
-      } else {
-        console.log("No fue exitoso el inicio de sesion");
-      }
-      console.log(response.status); */
-      /* axios.post('http://localhost:8080/api.mare.com/user/login', {
-        email: email,
-        password: password
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      }); */
-
-      const respuesta = await fetch('http://localhost:8080/api.mare.com/user/login');
-      console.log(respuesta);
-      if(respuesta.status===200) console.log("Login activo url");
-      console.log("no activo");
-
-
-      /* const url = "http://localhost:8080/api.mare.com/user/login";
+      /* =============================================== */
+      /* const url = "http://localhost:8080/api.mare.com/user/login"; */
+      const url = "https://mare-production.up.railway.app/api.mare.com/user/login";
+      
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: "correo@correo.com",
-          password: "123456",
+          email: email,
+          password: password,
         }),
       });
 
-      if (response.status === 200) {
-        console.log("Login activo url");
-      } else {
-        console.log("no activo");
-      } */
-
-
-
-
-
-      /* try {
-        const request = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password
-          })
-        };
-        const response = await fetch("/api.mare.com/usuarios/login", request);
-        const data = await response.json();
-        console.log(data);
-      } catch (error) { setError(error.message); }  */
-
-
-
+      console.log(response);
+      const data = await response.json();
+      console.log(data);
+     
+      if (response.status === 200 && response.ok && data.mensaje === "Registro exitoso") {
+        alert("Loguin correcto");
+        window.location ="/Faq"; 
+      }
+      if (data.mensaje === "Contraseña Incorrecta") {
+        alert("Verifique sus datos de inicio de sesion")
+      }
+      if(response.status===404){
+        alert("Usuario no encontrado");
+      }
+      /* =============================================== */
     } else {
-      console.log("Login invalido");
+      console.log("Campos no rellenados correctamente");
       document.getElementById("form-message").classList.remove("hidden");
       document.getElementById("form-message").classList.add("block");
     }

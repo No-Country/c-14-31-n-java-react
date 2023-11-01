@@ -5,10 +5,10 @@ const useFetchCategory = (idCategory, searchNameProduct) => {
   const [dataProducts, setDataProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL = "http://localhost:8080/";
+  const BASE_URL = "https://mare-production.up.railway.app/";
 
   useEffect(() => {
-    console.log(idCategory, searchNameProduct);
+    setLoading(true);
     const getData = async () => {
       try {
         let url = BASE_URL;
@@ -18,8 +18,6 @@ const useFetchCategory = (idCategory, searchNameProduct) => {
         } else if (searchNameProduct) {
           url += `products/filter/${searchNameProduct}`;
         }
-
-        console.log(url);
 
         const response = await axios.get(url);
         setDataProducts(response.data);
