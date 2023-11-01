@@ -1,5 +1,4 @@
 import { BsCart3, BsHeart } from "react-icons/bs";
-import colors from "../../assets/img/gamaColoresExample.png";
 
 const CardStore = ({ product, handleInfoModal, home = false }) => {
   const { name, price, image } = product;
