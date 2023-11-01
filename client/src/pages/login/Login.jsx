@@ -25,7 +25,9 @@ const Login = () => {
       document.getElementById("form-message").classList.remove("block");
 
       /* =============================================== */
-      const url = "http://localhost:8080/api.mare.com/user/login";
+      /* const url = "http://localhost:8080/api.mare.com/user/login"; */
+      const url = "https://mare-production.up.railway.app/api.mare.com/user/login";
+      
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -36,16 +38,20 @@ const Login = () => {
           password: password,
         }),
       });
+
       console.log(response);
       const data = await response.json();
       console.log(data);
-      if (response.status === 200) {
-        console.log("Login activo url");
-
-        console.log(response.data.token);
-      } else {
-        alert(response.data.message)
-        console.log("no activo");
+     
+      if (response.status === 200 && response.ok && data.mensaje === "Registro exitoso") {
+        alert("Loguin correcto");
+        window.location ="/Faq"; 
+      }
+      if (data.mensaje === "Contraseña Incorrecta") {
+        alert("Verifique sus datos de inicio de sesion")
+      }
+      if(response.status===404){
+        alert("Usuario no encontrado");
       }
       /* =============================================== */
 
