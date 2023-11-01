@@ -134,7 +134,7 @@ const Store = () => {
       <section className="lg:flex">
         <article className="w-full font-nunito lg:w-1/3 lg:flex lg:justify-center  bg-neutral-200 ">
           <div className="lg:w-full bg-neutral-50 ">
-            <div className="w-96 h-52 my-5 mx-10">
+            <div className="h-52 my-5 lg:w-full">
               <h4 className="text-center my-1 text-lg font-semibold">
                 Busca tu producto.
               </h4>
@@ -332,11 +332,11 @@ const Store = () => {
         </article>
 
         {loading ? (
-          <div className="w-full h-[530px] md:h-[830px] grid place-content-center  bg-primary-100">
+          <div className="w-11/12 h-[530px] m-auto md:h-[830px] grid place-content-center lg:w-3/4  bg-primary-100">
             <span className="loader "></span>
           </div>
         ) : (
-          <article className="h-[600px] m-auto my-4 overflow-hidden overflow-y-auto scrollbar flex flex-wrap justify-center lg:w-3/4  lg:h-[760px] lg:my-0 lg:justify-evenly xl:h-[830px] bg-primary-900">
+          <article className="h-[600px] m-auto my-4 overflow-hidden overflow-y-auto scrollbar flex flex-wrap justify-center lg:w-3/4 lg:h-[760px] lg:my-0 lg:justify-evenly xl:h-[830px] bg-primary-900">
             {notFoundProduct ? (
               <div className="w-full h-96 grid place-content-center">
                 <p className="text-3xl text-white font-bold">
