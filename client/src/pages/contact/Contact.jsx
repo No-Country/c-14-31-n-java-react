@@ -26,7 +26,7 @@ const Contact = () => {
                 <div>
                     <h2 className="text-center font-nunito mt-8 lg:text-3xl">Seguinos en nuestras redes sociales</h2>
                     <article className="flex justify-between mx-auto mt-4 max-w-[200px]">
-                        <Link to="https://api.whatsapp.com/send?phone=111111111" target="_blank">
+                        <Link to="https://api.whatsapp.com/send/?phone=5492234399798&text&type=phone_number&app_absent=0" target="_blank">
                             <BsWhatsapp className="h-6 w-6 text-[#61B75F]" />
                         </Link>
                         <Link to="https://www.facebook.com/mareindumentaria/" target="_blank">

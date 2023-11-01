@@ -34,7 +34,7 @@ const HomeBody = () => {
   const { loading, featured } = useFetchFeatured();
 
   return (
-    <main className="max-w-screen-2xl min-h-screen  m-auto">
+    <main className="max-w-screen-2xl m-auto">
       <div className="h-80 lg:h-96  bg-red-100 flex items-center justify-center">
         <Slider images={images} />
       </div>
@@ -49,7 +49,7 @@ const HomeBody = () => {
           )}
 
           {featured?.map((product) => (
-            <CardStore key={product.id} product={product} />
+            <CardStore key={product.id} product={product} home={true}/>
           ))}
         </div>
       </article>
