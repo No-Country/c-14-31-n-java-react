@@ -5,9 +5,9 @@ import { RiArrowRightSLine, RiFilter2Fill } from "react-icons/ri";
 
 import useFetchAllCategories from "../../services/useFetchAllCategories";
 import CardStore from "./CardStore";
-import useFetchCategory from "../../services/useFetchFilterCategories";
 import Modal from "./Modal";
 import { useModal } from "../../hooks/useModal";
+import useFetchCategory from "../../services/useFetchFilterCategories";
 
 const Store = () => {
   const initialToggle = {
@@ -129,17 +129,17 @@ const Store = () => {
     : "Mostrar Filtro";
 
   return (
-    <main className="max-w-screen-2xl  m-auto relative">
+    <main className="max-w-screen-2xl m-auto relative">
       <Header />
       <section className="lg:flex">
         <article className="w-full font-nunito lg:w-1/3 lg:flex lg:justify-center  bg-neutral-200 ">
           <div className="lg:w-full bg-neutral-50 ">
-            <div className="h-52 my-5 ">
+            <div className="w-96 h-52 my-5 mx-10">
               <h4 className="text-center my-1 text-lg font-semibold">
-                Encuentra el producto de tu agrado.
+                Busca tu producto.
               </h4>
               <form
-                className="w-full h-48 flex flex-col items-center justify-evenly "
+                className="h-48 flex flex-col items-center justify-evenly "
                 onSubmit={handleSubmit}>
                 <label
                   htmlFor="Username"
@@ -156,7 +156,7 @@ const Store = () => {
                     onChange={handleInputSearch}
                   />
 
-                  <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
+                  <span className="pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-neutral-50 p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs">
                     Nombre del producto
                   </span>
 
@@ -169,7 +169,7 @@ const Store = () => {
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="h-4 w-4">
+                      className="h-4 w-4 hover:text-primary-700">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -185,19 +185,27 @@ const Store = () => {
                   </p>
                 )}
 
-                <button
-                  type="submit"
-                  className="w-40 h-10 rounded-md bg-primary-700 text-white hover:bg-white hover:border border-primary-700 hover:text-primary-700 hover:font-bold transition ease-in-out duration-500
+                <div className="w-96 h-14 flex justify-evenly items-center ">
+                  <button
+                    type="submit"
+                    className="w-40 h-10 rounded-md bg-primary-700 text-white hover:bg-white hover:border border-primary-700 hover:text-primary-700 hover:font-bold transition ease-in-out duration-500 lg:w-36 lg:h-12
                   ">
-                  Buscar
-                </button>
-                <button
-                  type="button"
-                  className="w-40 h-10 rounded-md bg-primary-700 text-white hover:bg-white hover:border border-primary-700 hover:text-primary-700 hover:font-bold transition ease-in-out duration-500
+                    Buscar
+                  </button>
+                  <button
+                    type="button"
+                    className="w-40 h-10 rounded-md bg-primary-700 text-white hover:bg-white hover:border border-primary-700 hover:text-primary-700 hover:font-bold transition ease-in-out duration-500 lg:w-36 lg:h-12
                   "
-                  onClick={() => setSearchProduct("")}>
-                  Todos los productos
-                </button>
+                    onClick={() => setSearchProduct("")}>
+                    Volver a la tienda
+                  </button>
+                </div>
+                <p className="text-primary-700">
+                  Número de Productos
+                  <p className="font-semibold text-center">
+                    {filterPrice.length}
+                  </p>
+                </p>
               </form>
             </div>
             <div
@@ -322,12 +330,13 @@ const Store = () => {
             </div>
           </div>
         </article>
+
         {loading ? (
           <div className="w-full h-[530px] md:h-[830px] grid place-content-center  bg-primary-100">
             <span className="loader "></span>
           </div>
         ) : (
-          <article className="h-[600px] m-auto my-4 overflow-hidden overflow-y-auto scrollbar flex flex-wrap justify-center lg:w-3/4  lg:h-[750px] lg:my-0 lg:justify-evenly xl:h-[825px]  bg-primary-900">
+          <article className="h-[600px] m-auto my-4 overflow-hidden overflow-y-auto scrollbar flex flex-wrap justify-center lg:w-3/4  lg:h-[760px] lg:my-0 lg:justify-evenly xl:h-[830px] bg-primary-900">
             {notFoundProduct ? (
               <div className="w-full h-96 grid place-content-center">
                 <p className="text-3xl text-white font-bold">
@@ -350,6 +359,7 @@ const Store = () => {
 
         {isOpen && <Modal infoModal={infoModal} closeModal={closeModal} />}
       </section>
+
       <Footer />
     </main>
   );

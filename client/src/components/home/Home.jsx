@@ -51,11 +51,6 @@ const HomeBody = () => {
           {featured?.map((product) => (
             <CardStore key={product.id} product={product} home={true}/>
           ))}
-          {/*<Card img={example1} name="Blusa Algodon" price="10100" />
-          <Card img={example2} name="Jeans elastizados" price="18500" />
-          <Card img={example3} name="Suéter lanilla" price="8500" />
-          <Card img={example4} name="Vestidos de fibrana" price="18100" />
-          <Card img={example5} name="Remeras estampadas" price="12200" />*/}
         </div>
       </article>
     </main>

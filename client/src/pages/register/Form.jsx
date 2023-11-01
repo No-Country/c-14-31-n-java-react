@@ -74,10 +74,6 @@ const Form = () => {
 
     setErrorMessageForm({ error: false, errorMessage: "" });
 
-    //setForm(initialForm);
-    //setConfirmPass("");
-    //setSecurityPass(initialSecurityPass);
-
     const formWithoutSpaces = {
       name: form.name.trim(),
       lastName: form.lastName.trim(),
@@ -87,7 +83,6 @@ const Form = () => {
       password: form.password,
     };
 
-    //console.log(formWithoutSpaces);
     const response = await newUser(formWithoutSpaces);
 
     const alert = {
@@ -95,14 +90,18 @@ const Form = () => {
       title: "",
     };
 
-    response.data.mensaje === "Usuario creado con exito"
-      ? ((alert.icon = "success"), (alert.title = "Usuario Registrado"))
+    response.status === 200
+      ? ((alert.icon = "success"),
+        (alert.title = "Usuario Registrado"),
+        (setForm(initialForm),
+        setConfirmPass(""),
+        setSecurityPass(initialSecurityPass)))
       : ((alert.icon = "error"), (alert.title = "El email ya esta en uso "));
 
     Swal.fire({
       position: "center",
-      icon: `${alert.icon}`,
-      title: `${alert.title}`,
+      icon: alert.icon,
+      title: alert.title,
       showConfirmButton: false,
       timer: 1500,
     });
