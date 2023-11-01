@@ -8,7 +8,7 @@ const useFetchCategory = (idCategory, searchNameProduct) => {
   const BASE_URL = "http://localhost:8080/";
 
   useEffect(() => {
-    console.log(idCategory, searchNameProduct);
+    setLoading(true);
     const getData = async () => {
       try {
         let url = BASE_URL;
@@ -18,8 +18,6 @@ const useFetchCategory = (idCategory, searchNameProduct) => {
         } else if (searchNameProduct) {
           url += `products/filter/${searchNameProduct}`;
         }
-
-        console.log(url);
 
         const response = await axios.get(url);
         setDataProducts(response.data);
