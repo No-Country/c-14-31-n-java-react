@@ -4,27 +4,53 @@ import img2 from "../../assets/img/carouselImg1.png";
 import img3 from "../../assets/img/carouselImg2.png";
 import img4 from "../../assets/img/carouselImg3.png";
 import img5 from "../../assets/img/carouselImg4.png";
+import { LiaAngleLeftSolid, LiaAngleRightSolid } from "react-icons/lia";
 
 const Slider = ({ images }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const nextSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === images.length - 1 ? 0 : prevSlide + 1
+    );
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? images.length - 1 : prevSlide - 1
+    );
+  };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) =>
-        prevSlide === images.length - 1 ? 0 : prevSlide + 1
-      );
-    }, 6000); // Cambia de slide cada 3 segundos
+    let interval;
 
-    return () => clearInterval(interval);
-  }, [images]);
+    if (!isHovered) {
+      interval = setInterval(() => {
+        nextSlide();
+      }, 4000);
+    }
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [images, isHovered]);
 
   return (
-    <>
-      <div className="relative w-full lg:h-24  max-w-2xl mx-auto">
+    <div className="w-full relative">
+      <div
+        className="relative w-full lg:h-24 max-w-2xl mx-auto"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}>
+        <button
+          onClick={prevSlide}
+          className="w-10 h-10 grid place-content-center text-white rounded-full px-4 py-2 absolute left-2 bg-primary-700 z-20 md:-top-3 md:-left-4 lg:-left-32 lg:top-5 lg:w-12 lg:h-12 hover:text-primary-700 transition-colors duration-300 ease-in-out ">
+          <LiaAngleLeftSolid className="w-10 h-10  rounded-full hover:bg-white" />
+        </button>
         {images.map((slide, index) => (
           <div
             key={index}
-            className={`absolute -top-28 left-0 w-full lg:w-[900px]  lg:-left-28 h-full  transition-opacity duration-500 ${
+            className={`absolute -top-28 left-0 w-full lg:w-[900px] lg:-left-28 h-full transition-opacity duration-500 ${
               index === currentSlide ? "opacity-100" : "opacity-0"
             }`}>
             <img
@@ -32,12 +58,16 @@ const Slider = ({ images }) => {
               alt={slide.caption}
               className="w-full h-60 lg:h-80 object-cover"
             />
-            {/*<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white text-center py-2 lg:bottom-14">
-              {slide.caption}
-            </div>*/}
           </div>
         ))}
+        <button
+          onClick={nextSlide}
+          className="w-10 h-10 grid place-content-center text-white rounded-full px-4 py-2 absolute top-0 right-2 bg-primary-700 z-20 md:-top-3 md:-right-4 lg:-right-32 lg:top-5 lg:w-12 lg:h-12 hover:text-primary-700 transition-colors duration-300 ease-in-out">
+          <LiaAngleRightSolid className="w-10 h-10 rounded-full hover:bg-white" />
+        </button>
       </div>
+      <div className="flex justify-center mt-4"></div>
+
       {/*<div
         id="default-carousel"
         className="relative w-full"
@@ -156,7 +186,7 @@ const Slider = ({ images }) => {
           </span>
         </button>
       </div>*/}
-    </>
+    </div>
   );
 };
 
