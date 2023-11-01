@@ -4,7 +4,7 @@ import { Footer } from "../../components/footer/Footer";
 
 const Home = () => {
   return (
-    <div className="max-w-screen-2xl min-h-screen flex flex-col">
+    <div className="max-w-screen-2xl min-h-screen m-auto flex flex-col">
       <div>
         <Header />
       </div>
