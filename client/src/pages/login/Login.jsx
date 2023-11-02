@@ -1,14 +1,11 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import imgLogin from "../../assets/img/login.jpg";
 import { useState } from "react";
 import { BiError } from "react-icons/bi";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 import Header from "../../components/header/Header";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const navigate = useNavigate();
+const Login = () => {  
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,16 +13,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (
-      /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email) &&
-      /^.{6,12}$/.test(password)
-    ) {
+    if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(email) && /^.{6,12}$/.test(password)) {
       console.log("Campos rellenados");
       document.getElementById("form-message").classList.add("hidden");
       document.getElementById("form-message").classList.remove("block");
-
       /* =============================================== */
-      const url = "http://localhost:8080/api.mare.com/user/login";
+      /* const url = "http://localhost:8080/api.mare.com/user/login"; */
+      const url = "https://mare-production.up.railway.app/api.mare.com/user/login";
+      
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -36,21 +31,24 @@ const Login = () => {
           password: password,
         }),
       });
+
       console.log(response);
       const data = await response.json();
       console.log(data);
-      if (response.status === 200) {
-        console.log("Login activo url");
-
-        console.log(response.data.token);
-      } else {
-        alert(response.data.message)
-        console.log("no activo");
+     
+      if (response.status === 200 && response.ok && data.mensaje === "Registro exitoso") {
+        alert("Loguin correcto");
+        window.location ="/Faq"; 
+      }
+      if (data.mensaje === "Contraseña Incorrecta") {
+        alert("Verifique sus datos de inicio de sesion")
+      }
+      if(response.status===404){
+        alert("Usuario no encontrado");
       }
       /* =============================================== */
-
     } else {
-      console.log("Login invalido");
+      console.log("Campos no rellenados correctamente");
       document.getElementById("form-message").classList.remove("hidden");
       document.getElementById("form-message").classList.add("block");
     }
