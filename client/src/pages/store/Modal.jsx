@@ -1,4 +1,3 @@
-import { BsCart3 } from "react-icons/bs";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Modal = ({ infoModal, closeModal }) => {
@@ -23,13 +22,7 @@ const Modal = ({ infoModal, closeModal }) => {
             {name}
           </p>
 
-          <div className="h-24 flex flex-col justify-between absolute top-14 right-0">
-            <div className="w-10 h-10 grid place-content-center rounded-full bg-white bg-opacity-50">
-              {/*<button className="text-2xl ">
-                <BsCart3 />
-              </button>*/}
-            </div>
-          </div>
+          <div className="h-24 flex flex-col justify-between absolute top-14 right-0"></div>
           <div className="w-60 h-64 mt-2 ">
             <img src={image} alt="" className="w-full h-full object-cover" />
           </div>

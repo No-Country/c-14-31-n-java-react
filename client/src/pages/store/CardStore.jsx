@@ -1,18 +1,14 @@
+import { useState } from "react";
 import { BsCart3, BsHeart } from "react-icons/bs";
 
 const CardStore = ({ product, handleInfoModal, home = false }) => {
   const { name, price, image } = product;
+
   return (
     <div className="w-[250px] h-[380px] bg-white relative m-1.5 md:h-[341px] md:w-[260px] rounded-tr-[20px] rounded-bl-[20px] border-[0.5px] border-neutral-500 overflow-hidden">
-      <div className="h-24 flex flex-col justify-between absolute top-2 right-0">
-        {/*<div className="w-10 h-10 grid place-content-center rounded-full bg-white bg-opacity-50">
-          <button className="text-2xl ">
-            <BsCart3 />
-          </button>
-        </div>*/}
-      </div>
+      <div className="h-24 flex flex-col justify-between absolute top-2 right-0"></div>
       <div className="h-4/5 border-b-[.5px]  border-neutral-500">
-        <img className="h-full w-full object-cover" src={image} alt="" />
+        <img className="h-full w-full object-cover" src={image} alt={name} />
       </div>
 
       <h3 className="text-lg pl-3 leading-7 font-nunito  md:text-[16px] md:text-left md:pl-3">
