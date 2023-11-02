@@ -8,6 +8,7 @@ import CardStore from "./CardStore";
 import Modal from "./Modal";
 import { useModal } from "../../hooks/useModal";
 import useFetchCategory from "../../services/useFetchFilterCategories";
+import ModalCart from "./ModalCard";
 
 const Store = () => {
   const initialToggle = {
@@ -25,13 +26,16 @@ const Store = () => {
   const [infoModal, setInfoModal] = useState([]);
   const [errorInput, setErrorInput] = useState(false);
   const [notFoundProduct, setNotFoundProduct] = useState(false);
-
   const { allCategories } = useFetchAllCategories();
   const { loading, dataProducts } = useFetchCategory(category, searchProduct);
+  const [productsCard, setProductsCard] = useState([]);
 
-  const { isOpen, openModal, closeModal } = useModal();
+  const [isOpen, openModal, closeModal] = useModal();
+  const [isOpenCart, openModalCart, closeModalCart] = useModal();
 
   const inputRef = useRef();
+
+  const handleAddToCart = (product) => {};
 
   const handleChangeCategory = (e) => {
     const categoryOption = e.target.value;
@@ -328,6 +332,9 @@ const Store = () => {
                 </ul>
               </div>
             </div>
+            <div>
+              <button onClick={openModalCart}>Ver Carrito</button>
+            </div>
           </div>
         </article>
 
@@ -348,6 +355,7 @@ const Store = () => {
                 {filterPrice?.map((product) => (
                   <CardStore
                     key={product.id}
+                    handleAddToCart={handleAddToCart}
                     product={product}
                     handleInfoModal={handleInfoModal}
                   />
@@ -358,6 +366,13 @@ const Store = () => {
         )}
 
         {isOpen && <Modal infoModal={infoModal} closeModal={closeModal} />}
+
+        {isOpenCart && (
+          <ModalCart
+            productsCard={productsCard}
+            closeModalCart={closeModalCart}
+          />
+        )}
       </section>
 
       <Footer />

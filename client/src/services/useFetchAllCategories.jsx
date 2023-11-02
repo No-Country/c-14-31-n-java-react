@@ -3,7 +3,7 @@ import axios from "axios";
 
 const useFetchAllCategories = () => {
   const [allCategories, setAllCategories] = useState();
-  const baseUrl = "https://mare-production.up.railway.app/categories";
+  const baseUrl = "http://localhost:8080/categories";
 
   useEffect(() => {
     async function getAllCategories() {

@@ -25,9 +25,9 @@ const Modal = ({ infoModal, closeModal }) => {
 
           <div className="h-24 flex flex-col justify-between absolute top-14 right-0">
             <div className="w-10 h-10 grid place-content-center rounded-full bg-white bg-opacity-50">
-              {/*<button className="text-2xl ">
+              <button className="text-2xl ">
                 <BsCart3 />
-              </button>*/}
+              </button>
             </div>
           </div>
           <div className="w-60 h-64 mt-2 ">
