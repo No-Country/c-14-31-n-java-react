@@ -15,7 +15,7 @@ Indumentarias Mare es un emocionante y elegante ecommerce desarrollado con tecno
 	+ Vite.
 	+ Axios.
 	+ TailwindCSS.
-+ Backendr:
++ Backend:
 	+ Java.
 	+ Spring Boot.
 	+ MySQL.
