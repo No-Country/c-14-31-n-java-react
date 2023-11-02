@@ -8,7 +8,6 @@ import CardStore from "./CardStore";
 import Modal from "./Modal";
 import { useModal } from "../../hooks/useModal";
 import useFetchCategory from "../../services/useFetchFilterCategories";
-import ModalCart from "./ModalCard";
 
 const Store = () => {
   const initialToggle = {
@@ -28,14 +27,10 @@ const Store = () => {
   const [notFoundProduct, setNotFoundProduct] = useState(false);
   const { allCategories } = useFetchAllCategories();
   const { loading, dataProducts } = useFetchCategory(category, searchProduct);
-  const [productsCard, setProductsCard] = useState([]);
 
   const [isOpen, openModal, closeModal] = useModal();
-  const [isOpenCart, openModalCart, closeModalCart] = useModal();
 
   const inputRef = useRef();
-
-  const handleAddToCart = (product) => {};
 
   const handleChangeCategory = (e) => {
     const categoryOption = e.target.value;
@@ -182,13 +177,11 @@ const Store = () => {
                     </svg>
                   </span>
                 </label>
-
                 {errorInput && (
                   <p className="w-11/12 text-center text-sm font-semibold rounded-lg p-2 m-1 text-white bg-red-500">
                     Escribe el nombre del producto por favor.
                   </p>
                 )}
-
                 <div className="w-96 h-14 flex justify-evenly items-center ">
                   <button
                     type="submit"
@@ -204,16 +197,14 @@ const Store = () => {
                     Volver a la tienda
                   </button>
                 </div>
-                <p className="text-primary-700">
-                  Número de Productos
-                  <p className="font-semibold text-center">
-                    {filterPrice.length}
-                  </p>
+                <p className="text-primary-700">Número de Productos</p>
+                <p className="text-primary-700 font-semibold text-center">
+                  {filterPrice.length}
                 </p>
               </form>
             </div>
             <div
-              className="flex items-center bg-neutral-200 text-xl p-3 transition duration-300 ease-in"
+              className="flex items-center bg-neutral-200 text-xl p-3 transition duration-300 ease-in cursor-pointer"
               onClick={() => handleToggleFilter("categories")}>
               <h4 className={`pr-3 font-semibold`}>{textFilter}</h4>
               <RiFilter2Fill />
@@ -238,16 +229,16 @@ const Store = () => {
                 </div>
                 <ul
                   className={`${
-                    !toggleCategories.category ? "hidden" : "block"
+                    !toggleCategories.category ? "hidden" : "block "
                   }`}>
                   <li>
-                    <label htmlFor="all">
+                    <label htmlFor="all" className="cursor-pointer">
                       <input
                         id="all"
                         type="radio"
                         name="category"
                         value="all"
-                        className="mx-2"
+                        className="mx-2 cursor-pointer"
                         checked={category === "all" ? true : false}
                         onChange={handleChangeCategory}
                       />
@@ -256,13 +247,13 @@ const Store = () => {
                   </li>
                   {allCategories?.map((category) => (
                     <li key={category.id}>
-                      <label htmlFor={category.name}>
+                      <label htmlFor={category.name} className="cursor-pointer">
                         <input
                           type="radio"
                           name="category"
                           id={category.name}
                           value={category.id}
-                          className="mx-2"
+                          className="mx-2 "
                           onChange={handleChangeCategory}
                         />
                         {category.name}
@@ -288,7 +279,7 @@ const Store = () => {
                 <ul
                   className={`${!toggleCategories.price ? "hidden" : "block"}`}>
                   <li>
-                    <label htmlFor="high">
+                    <label htmlFor="high" className="cursor-pointer">
                       <input
                         id="high"
                         type="radio"
@@ -302,7 +293,7 @@ const Store = () => {
                     </label>
                   </li>
                   <li>
-                    <label htmlFor="low">
+                    <label htmlFor="low" className="cursor-pointer">
                       <input
                         id="low"
                         type="radio"
@@ -316,7 +307,7 @@ const Store = () => {
                     </label>
                   </li>
                   <li>
-                    <label htmlFor="reset">
+                    <label htmlFor="reset" className="cursor-pointer">
                       <input
                         id="reset"
                         type="radio"
@@ -331,9 +322,6 @@ const Store = () => {
                   </li>
                 </ul>
               </div>
-            </div>
-            <div>
-              <button onClick={openModalCart}>Ver Carrito</button>
             </div>
           </div>
         </article>
@@ -355,7 +343,6 @@ const Store = () => {
                 {filterPrice?.map((product) => (
                   <CardStore
                     key={product.id}
-                    handleAddToCart={handleAddToCart}
                     product={product}
                     handleInfoModal={handleInfoModal}
                   />
@@ -366,13 +353,6 @@ const Store = () => {
         )}
 
         {isOpen && <Modal infoModal={infoModal} closeModal={closeModal} />}
-
-        {isOpenCart && (
-          <ModalCart
-            productsCard={productsCard}
-            closeModalCart={closeModalCart}
-          />
-        )}
       </section>
 
       <Footer />

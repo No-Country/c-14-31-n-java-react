@@ -5,7 +5,7 @@ const useFetchFeatured = () => {
   const [featured, setFeatured] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const baseUrl = "http://localhost:8080/featured";
+  const baseUrl = "https://mare-production.up.railway.app/featured";
 
   useEffect(() => {
     async function getFeatured() {

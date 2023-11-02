@@ -18,6 +18,7 @@ const Contact = () => {
   const handleChange = (e) => {
     setEmailSus(e.target.value);
   };
+  const [iframeError, setIframeError] = useState(false);
   return (
     <div className="min-h-screen">
       <Header />
@@ -63,14 +64,22 @@ const Contact = () => {
             </div>
           </div>
           <div className="flex justify-center mt-2 lg:w-[36rem] max-w-md mx-auto">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3143.9278218687236!2d-57.549193300000006!3d-38.002144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9584dc1cf2611429%3A0xf9d1af1854d6add8!2sC%C3%B3rdoba%202035%2C%20B7600DVQ%20Mar%20del%20Plata%2C%20Provincia%20de%20Buenos%20Aires%2C%20Argentina!5e0!3m2!1ses-419!2smx!4v1698820992894!5m2!1ses-419!2smx"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="w-11/12 h-[350px] md:w-full md:h-[300px] lg:h-[450px]"></iframe>
-            {/*<img src={mapLocation} alt="Ubicación croqui" className="w-full" />*/}
+            {!iframeError ? (
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3143.9278218687236!2d-57.549193300000006!3d-38.002144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9584dc1cf2611429%3A0xf9d1af1854d6add8!2sC%C3%B3rdoba%202035%2C%20B7600DVQ%20Mar%20del%20Plata%2C%20Provincia%20de%20Buenos%20Aires%2C%20Argentina!5e0!3m2!1ses-419!2smx!4v1698820992894!5m2!1ses-419!2smx"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-11/12 h-[350px] md:w-full md:h-[300px] lg:h-[450px]"
+                onError={() => setIframeError(true)}></iframe>
+            ) : (
+              <img
+                src={mapLocation}
+                alt="Ubicación croqui"
+                className="w-full"
+              />
+            )}
           </div>
         </div>
         <div className="my-6">

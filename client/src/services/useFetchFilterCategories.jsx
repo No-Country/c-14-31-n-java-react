@@ -5,7 +5,7 @@ const useFetchCategory = (idCategory, searchNameProduct) => {
   const [dataProducts, setDataProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const BASE_URL = "http://localhost:8080/";
+  const BASE_URL = "https://mare-production.up.railway.app/";
 
   useEffect(() => {
     setLoading(true);
