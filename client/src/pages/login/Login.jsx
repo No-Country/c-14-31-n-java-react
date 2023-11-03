@@ -37,8 +37,9 @@ const Login = () => {
       console.log(data);
      
       if (response.status === 200 && response.ok && data.mensaje === "Registro exitoso") {
-        alert("Loguin correcto");
-        window.location ="/Faq"; 
+        /* alert("Loguin correcto"); */
+        window.location ="/store"; 
+        alert("Bienvenido "+ data.name);
       }
       if (data.mensaje === "Contraseña Incorrecta") {
         alert("Verifique sus datos de inicio de sesion")

@@ -8,6 +8,7 @@ import {
 import { RxHamburgerMenu } from "react-icons/rx";
 import LOGO from "../../assets/img/logo.png";
 import { useEffect, useRef, useState } from "react";
+import { useModal } from "../../hooks/useModal";
 
 const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
