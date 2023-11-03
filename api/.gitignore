@@ -3,11 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-!**/src/main/resources/application.properties
-!**src/main/java/com/mare/api/controller/UsuarioController.java
-!**/src/main/java/com/mare/api/entity/Usuario.java
-!**/src/main/java/com/mare/api/service/impl/UsuarioServiceImpl.java
-!**/src/main/java/com/mare/api/repository/IUsuarioRepository.java
+application.properties
+
 
 ### STS ###
 .apt_generated

@@ -4,40 +4,38 @@ import { BiShow } from "react-icons/bi";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
 import { newUser } from "../../services/RegisterNewUser";
 import Swal from "sweetalert2";
+import {
+  initialErrorMessageForm,
+  initialForm,
+  initialSecurityPass,
+} from "./initialValuesForm";
+import { getPasswordStrength } from "../../helpers/getPasswordStrength";
 
 const Form = () => {
-  const initialForm = {
-    nombre: "",
-    apellido: "",
-    direccion: "",
-    telefono: "",
-    email: "",
-    password: "",
-  };
-
   const { getName, errorInput } = useGetName();
 
   const [form, setForm] = useState(initialForm);
   const [isVisiblePass, setIsVisiblePass] = useState(false);
   const [isVisibleConfirm, setIsVisibleConfirm] = useState(false);
   const [confirmPass, setConfirmPass] = useState("");
-  const [errorMessageForm, setErrorMessageForm] = useState({
-    error: false,
-    errorMessage: "",
-  });
+  const [errorMessageForm, setErrorMessageForm] = useState(
+    initialErrorMessageForm
+  );
+  const [securityPass, setSecurityPass] = useState(initialSecurityPass);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
 
-    const inputValue = e.target.value;
+    getName(name, value);
 
-    getName(name, inputValue);
-
-    const trimmedValue = value.trim();
+    if (name === "password") {
+      const securityPass = getPasswordStrength(value);
+      setSecurityPass(securityPass);
+    }
 
     setForm({
       ...form,
-      [name]: trimmedValue,
+      [name]: value,
     });
   };
 
@@ -76,42 +74,37 @@ const Form = () => {
 
     setErrorMessageForm({ error: false, errorMessage: "" });
 
-    //setForm(initialForm);
-    //setConfirmPass("");
+    const formWithoutSpaces = {
+      name: form.name.trim(),
+      lastName: form.lastName.trim(),
+      address: form.address.trim(),
+      phone: form.phone,
+      email: form.email,
+      password: form.password,
+    };
+
+    const response = await newUser(formWithoutSpaces);
+
+    const alert = {
+      icon: "",
+      title: "",
+    };
+
+    response.status === 200
+      ? ((alert.icon = "success"),
+        (alert.title = "Usuario Registrado"),
+        (setForm(initialForm),
+        setConfirmPass(""),
+        setSecurityPass(initialSecurityPass)))
+      : ((alert.icon = "error"), (alert.title = "El email ya esta en uso "));
 
     Swal.fire({
       position: "center",
-      icon: "success",
-      title: "Usuario Registrado",
+      icon: alert.icon,
+      title: alert.title,
       showConfirmButton: false,
       timer: 1500,
     });
-
-    const response = await newUser(form);
-
-    console.log(response.data);
-
-    //try {
-    //  let config = {
-    //    method: "POST",
-    //    headers: {
-    //      Accept: "application/json",
-    //      "Content-Type": "application/json",
-    //    },
-    //    body: JSON.stringify(form),
-    //  };
-
-    //  let res = await fetch(
-    //    "localhost:8080/api.mare.com/usuarios/registro",
-    //    config
-    //  );
-
-    //  let user = await res.json();
-
-    //  console.log(user);
-    //} catch (error) {
-    //  console.log(error);
-    //}
   };
 
   const handleIsVisiblePass = () => {
@@ -123,7 +116,7 @@ const Form = () => {
   };
 
   const styleClass =
-    "w-[19.375rem] h-[2.875rem] xl:w-[590px] p-2 mt-1 mb-3 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-500 ";
+    "w-[19.375rem] h-[2.875rem] xl:w-[590px] p-2 mt-1 mb-3 border border-slate-300 rounded-md shadow-sm placeholder-slate-400 focus:border-sky-500 focus:ring-1 focus:ring-sky-500";
 
   const styleClassSuccess = "valid:border-green-600 focus:outline-none";
 
@@ -131,17 +124,18 @@ const Form = () => {
 
   const styleErrorInput =
     "w-11/12 text-center text-sm font-semibold rounded-lg p-2 mb-2 text-white bg-red-500";
+
   return (
     <form
-      className="w-[21.875rem] pl-5  md:m-auto lg:m-0"
+      className="w-[21.875rem] pl-5 md:m-auto lg:m-0"
       onSubmit={handleSubmit}>
       <label htmlFor="name">
         Nombre <span className="text-red-500">*</span>
         <input
           type="text"
           id="name"
-          name="nombre"
-          value={form.nombre}
+          name="name"
+          value={form.name}
           className={`${styleClass} ${
             errorInput.name.error ? styleClassInvalid : styleClassSuccess
           }`}
@@ -161,8 +155,8 @@ const Form = () => {
         <input
           type="text"
           id="lastName"
-          name="apellido"
-          value={form.apellido}
+          name="lastName"
+          value={form.lastName}
           maxLength={30}
           className={`${styleClass} ${
             errorInput.lastName.error ? styleClassInvalid : styleClassSuccess
@@ -185,8 +179,8 @@ const Form = () => {
         <input
           type="text"
           id="address"
-          name="direccion"
-          value={form.direccion}
+          name="address"
+          value={form.address}
           maxLength={50}
           className={`${styleClass} ${
             errorInput.address.error ? styleClassInvalid : styleClassSuccess
@@ -209,8 +203,8 @@ const Form = () => {
         <input
           type="text"
           id="phone"
-          name="telefono"
-          value={form.telefono}
+          name="phone"
+          value={form.phone}
           className={`${styleClass} ${
             errorInput.phone.error ? styleClassInvalid : styleClassSuccess
           }`}
@@ -265,10 +259,23 @@ const Form = () => {
           <span
             className="absolute right-7 bottom-6 text-2xl xl:right-3"
             onClick={handleIsVisiblePass}>
-            {!isVisiblePass ? <BiShow /> : <AiOutlineEyeInvisible />}
+            {isVisiblePass ? (
+              <BiShow className="text-primary-700" />
+            ) : (
+              <AiOutlineEyeInvisible className="text-primary-700" />
+            )}
           </span>
         </label>
       </div>
+      {securityPass.message.length > 1 && (
+        <div
+          role="alert"
+          className={`rounded border-s-4 ${securityPass.strong} p-4 ${securityPass.background}`}>
+          <p className={`block font-medium ${securityPass.text}`}>
+            Nivel de contraseña {securityPass.message}
+          </p>
+        </div>
+      )}
       {errorInput.password.error && (
         <p className={`${styleErrorInput}`}>
           {errorInput.password.messageError}
@@ -293,7 +300,11 @@ const Form = () => {
           <span
             className="absolute right-7 bottom-6 text-2xl xl:right-3"
             onClick={handleIsVisibleConfirm}>
-            {!isVisibleConfirm ? <BiShow /> : <AiOutlineEyeInvisible />}
+            {isVisibleConfirm ? (
+              <BiShow className="text-primary-700" />
+            ) : (
+              <AiOutlineEyeInvisible className="text-primary-700" />
+            )}
           </span>
         </label>
       </div>
