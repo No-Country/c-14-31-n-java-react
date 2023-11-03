@@ -4,6 +4,7 @@ package com.mare.api.controller;
 import com.mare.api.dto.request.UsuarioDto;
 import com.mare.api.dto.request.UsuarioLoginDto;
 import com.mare.api.dto.response.RespStandart;
+import com.mare.api.record.DataUser;
 import com.mare.api.service.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<RespStandart> loginUsuario(@RequestBody UsuarioLoginDto usuarioLoginDto){
+    public ResponseEntity<DataUser> loginUsuario(@RequestBody UsuarioLoginDto usuarioLoginDto){
         return new ResponseEntity<>(usuarioService.loginUsuario(usuarioLoginDto),  HttpStatus.OK);
     }
 }
